@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Card, CardContent } from "../../ui/card";
 import { Button } from "../../ui/button";
-import { Bell, Home, History, Heart, User, ChevronDown, ChevronUp, Car, Newspaper, FileText, ClipboardList, Shield, MessageSquare, CreditCard, Key, LayoutDashboard } from "lucide-react";
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
+import { Bell, Home, History, Heart, User, ChevronDown, ChevronUp, Car, Newspaper, FileText, 
+  ClipboardList, Shield, MessageSquare, CreditCard, Key, LayoutDashboard, PlusCircle, List, CheckSquare, RefreshCcw 
+} from "lucide-react";
 import Settings from "../myprofile";
 import BookingHistory from "./bookinghistory";
 import ManageNews from "../managenews";
@@ -70,6 +72,36 @@ export default function Dashboard() {
           </div>
           <nav className="space-y-3">
             {Object.entries(pages).map(([key, { name, icon }]) => (
+             key === "manageCar" ? (
+              <div key={key}>
+                <button
+                  onClick={() =>{ setCarDropdownOpen(!carDropdownOpen);handlePageChange("allCars")}}
+                  className="flex items-center justify-between w-full text-left text-xl text-white border-0 bg-blue-900 py-2 px-4 rounded hover:bg-gray-700"
+                >
+                  <div className="flex items-center space-x-3">
+                    {icon}
+                    <span>{name}</span>
+                  </div>
+                  {carDropdownOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </button>
+                {carDropdownOpen && (
+                    <div className="ml-8 space-y-2">
+                      <button onClick={() => handlePageChange("allCars")} className="flex items-center space-x-2 bg-blue-900 text-white text-left text-lg w-full border border-0 px-4 py-2 rounded hover:bg-gray-600">
+                        <List size={20} /> <span>All Cars</span>
+                      </button>
+                      <button onClick={() => handlePageChange("addCar")} className="flex items-center space-x-2 bg-blue-900 text-white text-left text-lg w-full border border-0 px-4 py-2 rounded hover:bg-gray-600">
+                        <PlusCircle size={20} /> <span>Add Car</span>
+                      </button>
+                      <button className="flex items-center space-x-2 bg-blue-900 text-white text-left text-lg w-full border border-0 px-4 py-2 rounded hover:bg-gray-600">
+                        <CheckSquare size={20} /> <span>Availability</span>
+                      </button>
+                      <button className="flex items-center space-x-2 bg-blue-900 text-white text-left text-lg w-full border border-0 px-4 py-2 rounded hover:bg-gray-600">
+                        <RefreshCcw size={20} /> <span>Recovery</span>
+                      </button>
+                    </div>
+                  )}
+              </div>
+            ) : (
               <button
                 key={key}
                 onClick={() => handlePageChange(key)}
@@ -80,6 +112,7 @@ export default function Dashboard() {
                 {icon}
                 <span>{name}</span>
               </button>
+            )
             ))}
           </nav>
         </aside>

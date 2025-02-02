@@ -1,8 +1,10 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { useNavigate } from "react-router-dom";
 
 
 const FooterScreen = () => {
+  const navigate = useNavigate();
   return (
     <footer className="bg-gray-100 text-gray-800 py-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -84,13 +86,13 @@ const FooterScreen = () => {
         <p className="text-lg text-black-800 mr-72">&copy; 2024 Lorepa. All rights reserved.</p>
 
           <div className="space-x-4 ml-96 mt-4 ">
-            <a href="#" className="hover:underline no-underline text-gray-500">
+            <a href="#" className="hover:underline no-underline text-gray-500" onClick={()=>navigate('/termofuse')}>
               Terms of Use
             </a>
             <a href="#" className="hover:underline no-underline text-gray-500">
               Legal Mentions
             </a>
-            <a href="#" className="hover:underline no-underline text-gray-500">
+            <a href="#" className="hover:underline no-underline text-gray-500" onClick={()=>navigate('/privacy')}>
               Privacy Policy
             </a>
             

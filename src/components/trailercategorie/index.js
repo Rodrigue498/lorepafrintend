@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TrailerCategories = () => {
     const categories = [
@@ -23,6 +24,7 @@ const TrailerCategories = () => {
             image: require("../../assets/utility.png"),
         },
     ];
+    const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 3;
@@ -61,11 +63,20 @@ const TrailerCategories = () => {
                             : "bg-blue-500 text-white hover:bg-blue-600"
                             }`}
                     >
-                        <img
-                            src={require("../../assets/arrow.png")}
-                            alt="Previous"
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
                             className="w-6 h-6"
-                        />
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 5l7 7-7 7"
+                            />
+                        </svg>
                     </button>
                 )}
                 <div className="grid gap-6 grid-cols-1 md:grid-cols-3 mx-4">
@@ -81,19 +92,37 @@ const TrailerCategories = () => {
                             />
                             <div className="p-4 flex items-center justify-between">
                                 <h3 className="text-lg font-semibold">{category.title}</h3>
-                                <button className="bg-blue-500 text-white p-2 rounded-full  hover:bg-blue-600">
+                                <button className="bg-gray-300 text-white p-2 border-0 rounded-full  hover:bg-blue-600">
                                     {category.title === "Enclosed" ? (
-                                        <img
-                                            src={require("../../assets/arrow.png")}
-                                            alt="Special Icon"
-                                            className="w-5 h-5"
-                                        />
+                                          <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          strokeWidth={2}
+                                          stroke="currentColor"
+                                          className="w-6 h-6"
+                                      >
+                                          <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              d="M9 5l7 7-7 7"
+                                          />
+                                      </svg>
                                     ) : (
-                                        <img
-                                            src={require("../../assets/arrow.png")}
-                                            alt="Next"
-                                            className="w-5 h-5"
+                                        <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={2}
+                                        stroke="currentColor"
+                                        className="w-6 h-6"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M9 5l7 7-7 7"
                                         />
+                                    </svg>
                                     )}
                                 </button>
                             </div>
@@ -105,8 +134,8 @@ const TrailerCategories = () => {
                         onClick={handleNext}
                         disabled={currentPage === totalPages - 1}
                         className={`p-2 rounded-full ${currentPage === totalPages - 1
-                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                            : "bg-blue-500 text-white hover:bg-blue-600"
+                            ? "bg-blue-300 text-gray-500 cursor-not-allowed border-0"
+                            : "bg-gray-300 text-white hover:bg-blue-600 border-0"
                             }`}
                     >
                         <svg
@@ -125,7 +154,13 @@ const TrailerCategories = () => {
                         </svg>
                     </button>
                 )}
+              
             </div>
+            <div className="flex justify-center mt-8">
+            <button onClick={()=>{
+                navigate('/categories')
+            }} className="p-4 rounded-lg text-xl w-36 bg-blue-400 border b-0">Learn More</button>
+        </div>
         </div>
     );
 };

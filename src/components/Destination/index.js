@@ -2,11 +2,12 @@ import React from "react";
 
 const TopDestinations = () => {
     const destinations = [
-        { name: "Halifax", location: "Nova Scotia", image: require("../../assets/cities.png") },
-        { name: "Quebec City", location: "Quebec", image: require("../../assets/cities.png") },
-        { name: "Montreal", location: "Quebec", image: require("../../assets/city2.png") },
-        { name: "Ottawa", location: "Ontario", image: require("../../assets/cities.png") },
-        { name: "Toronto", location: "Ontario", image: require("../../assets/city2.png") },
+        // {name:"Montréal",location:"Monteral",image:require("../../assets/monteral.png")},
+        { name: "Québec", location: "Nova Scotia", image: require("../../assets/qubec.png") },
+        { name: "Gatineau", location: "Quebec", image: require("../../assets/gatienu.png") },
+        { name: "Sherbrooke", location: "Quebec", image: require("../../assets/sherb.png") },
+        { name: "Lévis", location: "Ontario", image: require("../../assets/levis.png") },
+        { name: "Saguenay", location: "Ontario", image: require("../../assets/sague.png") },
     ];
 
     return (

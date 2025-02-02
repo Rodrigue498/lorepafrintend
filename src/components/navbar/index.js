@@ -162,14 +162,20 @@ const Navbar = () => {
             {isOpen && (
                 <div className="fixed absolute top-16 right-0 ml-4 bg-white shadow-lg w-1/6 py-4 m-2 rounded border border-200">
                     <a
-                    onClick={loginmodal}
+                    onClick={() => {
+                        loginmodal();
+                        setIsOpen(false);
+                    }}
                         href="#host"
                         className="block px-6 py-2 no-underline ml-2 text-black no-underline font-md"
                     >
                         Login
                     </a>
                     <a
-                    onClick={loginmodal}
+                     onClick={() => {
+                        loginmodal();
+                        setIsOpen(false);
+                    }}
                         href="#host"
                         className="block px-6 py-2 no-underline ml-2 text-black no-underline font-md"
                     >
@@ -184,7 +190,7 @@ const Navbar = () => {
                         <a
                             href="#host"
                             className="ml-2 text-black no-underline font-md"
-                            onClick={()=>{navigate('/becomehost')}}
+                            onClick={()=>{navigate('/becomehost');setIsOpen(false)}}
                         >
                             Become a host
                         </a>
@@ -198,7 +204,7 @@ const Navbar = () => {
                         <a
                             href="#host"
                             className="ml-2 text-black no-underline font-md"
-                            onClick={() => navigate("/howLorepaWorks")}
+                            onClick={() =>{ navigate("/howLorepaWorks");setIsOpen(false)}}
                         >
                             How Lorepa Works
                         </a>

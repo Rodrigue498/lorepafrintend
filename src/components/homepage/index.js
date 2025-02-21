@@ -87,7 +87,7 @@ const HomePage = () => {
                         <label className="block text-xs text-gray-500 mb-1">Place</label>
                         <GooglePlacesAutocomplete
                             key={activeTab} // Forces re-render when tab changes
-                            apiKey="API_KEY"
+                            apiKey={process.env.API_KEY}
                             selectProps={{
                                 value: place,
                                 onChange: setPlace,

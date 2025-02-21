@@ -5,7 +5,7 @@ const InsuranceFAQ = () => {
     <div className="flex items-center justify-center bg-gray-100 p-6 rounded-lg shadow-lg w-full mx-auto">
       {/* Logo Section */}
       <div className="relative mr-4">
-        <img src={require('../../assets/inssurance.png')} className="w-[600px] h-[600px]" alt="Insurance Logo"/>
+        <img src={require('../../assets/inssurance.png')} className="w-[300px] h-[300px]" alt="Insurance Logo"/>
         <div className="absolute top-0 left-0 w-full h-full -z-10">
           <svg
             width="100"
@@ -25,7 +25,7 @@ const InsuranceFAQ = () => {
 
       {/* FAQ Section + Dots */}
       <div className="flex flex-col items-start max-w-[500px] w-1/2 ml-24">
-        <p className="text-black font-bold text-5xl ">
+        <p className="text-black font-bold text-3xl ">
           F.A.Q 27: For coverage in case of damage during rental
         </p>
 

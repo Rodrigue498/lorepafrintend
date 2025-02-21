@@ -11,7 +11,7 @@ const CarSharingBanner = () => {
         </h1>
         <p className="mt-4 text-xl font-medium">
           Share your car when you're not using it and earn an average of{" "}
-          <span className="text-blue-600 font-bold">$712 per month*</span> with
+          <span className="text-blue-600 font-bold">$815 per month*</span> with
           Turo, the world's largest car-sharing platform.
         </p>
 

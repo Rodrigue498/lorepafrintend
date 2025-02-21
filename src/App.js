@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import Navbar from "./components/navbar";
 import FooterScreen from "./components/footerscreen";
@@ -34,10 +34,22 @@ function ScrollToTop() {
   return null;
 }
 
+function Layout({ children }) {
+  const location = useLocation();
+  const isDashboard = location.pathname === "/dashboard";
+
+  return (
+    <>
+      {!isDashboard && <Navbar />}
+      {children}
+      {!isDashboard && <FooterScreen />}
+    </>
+  );
+}
+
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  // Function to toggle login modal
   const toggleLoginModal = () => {
     setIsLoginModalOpen((prev) => !prev);
   };
@@ -45,56 +57,50 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Navbar onLoginClick={toggleLoginModal} />
-
-      {/* Login Modal */}
-      {isLoginModalOpen && <LoginModal onClose={toggleLoginModal} />}
-
-      {/* ✅ Use React Router for Navigation */}
-      <Routes>
-        <Route path="/" element={
-          <>
-            <HomePage />
-            <TrailerRentalPage />
-            <TrailerCategories />
-            <TopDestinations />
-            <TrailerRental />
-            <TrailerSection />
-            <ComparisonSection />
-            <RevenueBanner />
-          </>
-        } />
-        <Route path="/howLorepaWorks" element={
-          <>
-            <AboutUs />
-            <AboutUs1 />
-            <WhyLorepa />
-            <CategoryCarousel />
-          </>
-        } />
-        <Route path="/termofuse" element={<TermsOfUse />} />
-        <Route path="/learnmore" element={
-          <>
-            <BlogPage />
-            <BlogComparison />
-          </>
-        } />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/categories" element={<CarRental />} />
-        <Route path="/becomehost" element={
-          <>
-            <CarSharingBanner /> 
-            <TrailerRentalEstimator />
-            <InsuranceFAQ />
-            <InsuranceInfo />
-            <SignUpCar />
-          </>
-        } />
-      </Routes>
-
-      {/* Show Footer only if not on "dashboard" */}
-      <FooterScreen />
+      <Layout>
+        {isLoginModalOpen && <LoginModal onClose={toggleLoginModal} />}
+        <Routes>
+          <Route path="/" element={
+            <>
+              <HomePage />
+              <TrailerRentalPage />
+              <TrailerCategories />
+              <TopDestinations />
+              <TrailerRental />
+              <TrailerSection />
+              <ComparisonSection />
+              <RevenueBanner />
+            </>
+          } />
+          <Route path="/howLorepaWorks" element={
+            <>
+              <AboutUs />
+              <AboutUs1 />
+              <WhyLorepa />
+              <CategoryCarousel />
+            </>
+          } />
+          <Route path="/termofuse" element={<TermsOfUse />} />
+          <Route path="/learnmore" element={
+            <>
+              <BlogPage />
+              <BlogComparison />
+            </>
+          } />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/categories" element={<CarRental />} />
+          <Route path="/becomehost" element={
+            <>
+              <CarSharingBanner /> 
+              <TrailerRentalEstimator />
+              <InsuranceFAQ />
+              <InsuranceInfo />
+              <SignUpCar />
+            </>
+          } />
+        </Routes>
+      </Layout>
     </Router>
   );
 }

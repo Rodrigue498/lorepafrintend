@@ -425,7 +425,7 @@ const CarRental = () => {
                 </div>}
         <div>
           <GooglePlacesAutocomplete
-            apiKey= {process.env.API_KEY}
+            apiKey= {process.env.REACT_APP_API_KEYS}
             selectProps={{
               value: place,
               onChange: setPlace,

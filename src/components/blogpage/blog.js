@@ -109,7 +109,7 @@ const TrailerData = [
           <div className="max-w-6xl w-full">
         {/* Title */}
         <h1 className="text-5xl font-bold text-gray-800  mb-6">
-          Turo vs. Towlos
+          Turo vs. Lorepa
         </h1>
 
         {/* Conclusion */}

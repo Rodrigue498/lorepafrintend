@@ -7,7 +7,7 @@ const FooterScreen = () => {
   const navigate = useNavigate();
   return (
     <footer className="bg-gray-100 text-gray-800 py-10">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
         {/* Quick Links Section */}
         <div>
           <h3 className="font-bold text-lg mb-4">Quick Links</h3>

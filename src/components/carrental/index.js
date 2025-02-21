@@ -17,7 +17,7 @@ import { FaSearch } from "react-icons/fa";
 import {faApple, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useLocation } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -318,7 +318,7 @@ const CarRental = () => {
                             <div className="text-center mb-4">or</div>
                             <GoogleLogin
     onSuccess={async (response) => {
-        const userInfo = jwt_decode(response.credential);
+      const userInfo = jwtDecode(response.credential);
         console.log("Google User Info:", userInfo);
 
         const userPayload = {

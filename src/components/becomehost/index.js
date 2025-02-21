@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const CarSharingBanner = () => {
   return (
     <div className="w-full bg-white">
@@ -16,18 +17,7 @@ const CarSharingBanner = () => {
         </p>
 
         {/* Insurance Providers */}
-        <div className="flex items-center justify-center gap-8 mt-6">
-        <button className="border border-0 w-24 mt-6 bg-purple-600 text-white px-6 py-2 rounded-lg text-xl">
-          To
-        </button>
-          <span className="font-bold text-xl uppercase">Insurance Providers</span>
-          <img
-            src={require('../../assets/download.png')}
-            alt="Economical Insurance"
-            className="h-24"
-          />
-
-        </div>
+       
 
         {/* Button */}
         

@@ -5,7 +5,7 @@ const SignUpCar = () => {
     <div >
     <div className="flex items-center justify-between bg-gray-200 px-8 py-16">
       <div className="flex flex-col space-y-4">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
           List Your Car Today
         </h1>
         <p className="text-gray-700 text-xl">

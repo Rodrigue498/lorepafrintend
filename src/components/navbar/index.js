@@ -11,7 +11,7 @@ import {faApple, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useLocation } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -19,7 +19,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { isValidNumber } from "libphonenumber-js";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-
+import { FaTrailer } from "react-icons/fa";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -198,7 +198,7 @@ const Navbar = () => {
                             <div className="text-center mb-4">or</div>
                             <GoogleLogin
     onSuccess={async (response) => {
-        const userInfo = jwt_decode(response.credential);
+        const userInfo = jwtDecode(response.credential);
         console.log("Google User Info:", userInfo);
 
         const userPayload = {
@@ -321,12 +321,13 @@ const Navbar = () => {
                     </a>
                 </button>
                 {/* User Icons */}
-                <div className="flex items-center" onClick={toggleMenu}>
-                    <img
+                <img
                         src={internet}
                         alt="Internet Icon"
                         className="h-10 w-10"
                     />
+                <div className="flex items-center" onClick={toggleMenu}>
+                  
                     <img
                         src={line}
                         alt="Line Icon"
@@ -363,11 +364,7 @@ const Navbar = () => {
                         Registration
                     </a>
                     <div className="flex items-center px-6 text-gray-700 hover:bg-gray-100">
-                        <img
-                            src={car}
-                            alt="Car Icon"
-                            className="h-8 w-8"
-                        />
+<FaTrailer className="h-6 w-6"/>
                         <a
                             href="#host"
                             className="ml-2 text-black no-underline font-md"

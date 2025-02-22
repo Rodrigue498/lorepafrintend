@@ -45,7 +45,7 @@ const TrailerSection = () => {
                 className="w-16 h-12 object-cover"
               />
             </div>
-            <p className="text-gray-700 text-lg sm:text-xl text-center mb-6">
+            <p className="text-gray-700 text-lg sm:text-lg text-center mb-6">
               Earn extra income with your trailer or start your own business and earn with the system.
             </p>
             <div className="flex justify-center">

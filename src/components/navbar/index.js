@@ -234,6 +234,12 @@ const Navbar = () => {
     onError={() => {
         console.log("Login Failed");
     }}
+     style={{
+            width: "250px", // Adjust width
+            height: "50px", // Adjust height
+            fontSize: "16px", // Adjust font size
+            borderRadius: "8px", // Add rounded corners
+        }}
 />
 
 
@@ -290,7 +296,7 @@ const Navbar = () => {
                             {isRegistering ? "Already have an account? Login" : "Don't have an account? Register"}
                         </p>
 
-                        <button className="text-gray-500 mt-4" onClick={() => setLoginModal(false)}>
+                        <button className="text-gray-500 mt-4" onClick={() => setEmailModal(false)}>
                             Close
                         </button>
                     </div>

@@ -6,7 +6,7 @@ const ComparisonSection = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-center px-4 py-8">
       {/* Title Section */}
-      <h1 className="text-7xl  font-bold text-gray-800 text-center mb-4 w-1/4">
+      <h1 className="md:text-7xl text-lg  font-bold text-gray-800 text-center mb-4 w-1/4">
         Why List Your Trailer on Lorepa?
       </h1>
       <p className="text-lg text-gray-600 text-center mb-8">

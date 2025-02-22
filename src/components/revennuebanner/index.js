@@ -9,7 +9,7 @@ const RevenueBanner = () => {
           <p className="text-xl font-lg ">
             Every day your trailer is not in use is a missed income opportunity!
           </p>
-          <h1 className="text-6xl md:text-4xl font-bold leading-tight">
+          <h1 className="text-xl md:text-5xl font-bold leading-tight">
             Earn Extra Income Without Hassle
           </h1>
         </div>

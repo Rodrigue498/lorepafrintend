@@ -13,7 +13,7 @@ const TermsOfUse = () => {
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-        <h1 className="text-3xl md:text-6xl font-bold text-white">
+        <h1 className="text-xl md:text-6xl font-bold text-white">
           Conditions And Terms Of Use
         </h1>
       </div>

@@ -2,50 +2,49 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <div className=" bg-gray-50 py-8 px-4 bg-gradient-to-r from-blue-100 to-gray">
-      <div className=" mx-auto">
-
+    <div className="bg-gray-50 py-8 px-4 bg-gradient-to-r from-blue-100 to-gray-200">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Content Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Image and Text Block */}
-          <div className="md:col-span-1  ">
-          <h1 className="text-3xl  font-bold text-gray-800   ml-36">
-          ________
-        </h1>
-          <h1 className="text-7xl  font-bold text-gray-800  mb-8 ml-36">
-          WHO ARE WE?
-        </h1>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Side - Heading & Image */}
+          <div className="lg:col-span-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <h1 className="text-3xl font-bold text-gray-800">
+              ________
+            </h1>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 mb-8">
+              WHO ARE WE?
+            </h1>
             <img
-              src={require('../../assets/city1.png')}
+              src={require("../../assets/city1.png")}
               alt="Trailer Example"
-              className="rounded-lg shadow-md w-full h-[350px] mt-12 ml-96"
+              className="rounded-lg shadow-md w-full max-w-md h-auto mt-6"
             />
           </div>
-          <div className="md:col-span-2 space-y-6 ml-96">
-            {/* Text Content */}
-            
-            {/* Images */}
-            <div className="flex gap-4 mt-12">
+
+          {/* Right Side - Images & Text */}
+          <div className="lg:col-span-2 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+            {/* Two Side-by-Side Images */}
+            <div className="flex flex-col md:flex-row gap-4 mt-6 w-full justify-center lg:justify-start">
               <img
-                src={require('../../assets/cities.png')}
+                src={require("../../assets/cities.png")}
                 alt="City View 1"
-                className="rounded-lg shadow-md w-1/3 h-[450px] ml-8 "
+                className="rounded-lg shadow-md w-full md:w-1/2 h-auto"
               />
               <img
-                src={require('../../assets/city2.png')}
+                src={require("../../assets/city2.png")}
                 alt="City View 2"
-                className="rounded-lg shadow-md w-1/3 h-[450px] "
+                className="rounded-lg shadow-md w-full md:w-1/2 h-auto"
               />
             </div>
-            <p className="text-xl text-gray-700 ml-8">
-              The leading peer-to-peer trailer rental marketplace in Quebec. We
-              connect <br/>trailer owners with individuals looking to rent trailers
-              on a safe, secure,and <br/> user-friendly platform designed to simplify
-              trailer rentals.
+
+            {/* Description */}
+            <p className="text-lg md:text-xl text-gray-700 max-w-2xl">
+              The leading peer-to-peer trailer rental marketplace in Quebec. We connect
+              trailer owners with individuals looking to rent trailers on a safe, secure, and
+              user-friendly platform designed to simplify trailer rentals.
             </p>
           </div>
         </div>
-        
       </div>
     </div>
   );

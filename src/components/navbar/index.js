@@ -144,7 +144,7 @@ const Navbar = () => {
                 </div>
             )}
             {loginModal &&
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div className=" inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
                         {/* Header */}
                         <div className="flex justify-between items-center border-b px-4 ">
@@ -312,7 +312,7 @@ const Navbar = () => {
 
 
             {/* Spacer */}
-            <div className="flex-grow"></div>
+            <div className="md:flex-grow"></div>
 
             {/* "Devenez hôte" Button and Icons on the right */}
             <div className="flex items-center space-x-4">
@@ -348,7 +348,7 @@ const Navbar = () => {
             </div>
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="fixed absolute top-16 right-0 ml-4 bg-white shadow-lg w-1/6 py-4 m-2 rounded border border-200">
+                <div className="fixed absolute top-16 md:right-0 ml-4 bg-white shadow-lg w-1/6 py-4 m-2 rounded border border-200">
                     <a
                         onClick={() => {
                             loginmodal();

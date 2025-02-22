@@ -425,7 +425,7 @@ const CarRental = () => {
                 </div>}
         <div>
           <GooglePlacesAutocomplete
-            apiKey= {process.env.REACT_APP_API_KEYS}
+            apiKey= {process.env.REACT_API_KEYS}
             selectProps={{
               value: place,
               onChange: setPlace,
@@ -543,7 +543,7 @@ const CarRental = () => {
 
         </div>
 
-        <div className="flex-grow"></div>
+        <div className="md:flex-grow"></div>
         {/* "Devenez hôte" Button and Icons on the right */}
         <div className="flex items-center space-x-4">
 

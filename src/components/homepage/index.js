@@ -54,10 +54,10 @@ const HomePage = () => {
                 Discover the best trailers and motorhomes for your RV adventure
             </h5>
 
-            <div className="bg-white shadow-lg  w-full max-w-7xl md:w-7xl mx-auto p-3 md:p-6 rounded-2xl">
+            <div className="bg-white shadow-lg md:w-[1200px] mx-auto p-3 md:p-6 rounded-2xl">
     {/* Tabs Section */}
     <div className="relative shadow-lg flex flex-wrap items-center h-auto text-md rounded-lg p-4">
-        <div className="flex flex-wrap gap-x-10 md:gap-x-10 md:ps-96">
+        <div className="flex flex-wrap gap-x-10 md:gap-x-10 md:ps-72">
             {tabs.map((tab, index) => (
                 <a
                     href="#"
@@ -120,7 +120,7 @@ const HomePage = () => {
         <div className="flex-1 px-2 md:px-6 relative w-full md:w-auto">
             <label className="block text-xs text-gray-500 mb-1">Departure</label>
             <div
-                className="text-gray-700 cursor-pointer px-3 py-2 rounded-lg shadow-sm"
+                className="text-gray-700 cursor-pointer px-3 py-4 rounded-lg shadow-sm"
                 onClick={() => {
                     setShowDepartureCalendar(!showDepartureCalendar);
                     setShowArrivalCalendar(false);
@@ -139,7 +139,7 @@ const HomePage = () => {
             </div>
 
             {showDepartureCalendar && (
-                <div className="absolute z-50 top-12 left-0 shadow-lg p-2 rounded">
+                <div className="absolute z-50 top-16 left-0 shadow-lg p-2 md:w-96 rounded">
                     <DatePicker
                         selected={departureDate}
                         onChange={(date) => {
@@ -180,7 +180,7 @@ const HomePage = () => {
             </div>
 
             {showArrivalCalendar && (
-                <div className="absolute z-50 top-12 left-0 bg-white shadow-lg p-2 rounded">
+                <div className="absolute z-50 top-16 left-0 bg-white shadow-lg p-2 md:w-[330px] rounded">
                     <DatePicker
                         selected={arrivalDate}
                         onChange={(date) => {

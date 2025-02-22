@@ -143,172 +143,173 @@ const Navbar = () => {
                     />
                 </div>
             )}
-            {loginModal &&
-                <div className=" inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
-                        {/* Header */}
-                        <div className="flex justify-between items-center border-b px-4 ">
-                            <h2 className="text-2xl ml-24 font-semibold">Login or Register</h2>
-                            <button
-                                className="text-gray-500 text-lg bg-white border border-0 hover:text-gray-700"
-                                onClick={() => setLoginModal(false)}
-                            >
-                                ✕
-                            </button>
-                        </div>
+            {loginModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4">
+    <div className="bg-white rounded-lg shadow-lg w-full max-w-md sm:max-w-lg md:max-w-xl">
+      {/* Header */}
+      <div className="flex justify-between items-center border-b px-4 py-3">
+        <h2 className="text-2xl font-semibold text-center w-full">Login or Register</h2>
+        <button
+          className="text-gray-500 text-lg hover:text-gray-700"
+          onClick={() => setLoginModal(false)}
+        >
+          ✕
+        </button>
+      </div>
 
-                        {/* Content */}
-                        <div className="p-6">
-                            <h3 className="text-xl font-medium mb-4">Welcome to Lorepa</h3>
-                            <div>
-                <PhoneInput
-                    country={"us"} // Default country
-                    value={phoneNumber}
-                    onChange={handlePhoneChange}
-                    inputStyle={{ width: "100%", padding: "10px", fontSize: "16px" }}
-                    enableSearch
-                />
-                {!isValidPhone && (
-                    <p style={{ color: "red", fontSize: "14px" }}>Invalid phone number</p>
-                )}
-                <button onClick={sendOtp} className="w-full bg-blue-500 text-white py-2 mt-2 rounded">
-                    Send OTP
-                </button>
-            </div>
-            {confirmationResult && (
-                <div>
-                    <input
-                        type="text"
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value)}
-                        className="border rounded p-2 w-full mt-4"
-                        placeholder="Enter OTP"
-                    />
-                    <button onClick={verifyOtp} className="w-full bg-green-500 text-white py-2 mt-2 rounded">
-                        Verify OTP
-                    </button>
-                </div>
-            )}
+      {/* Content */}
+      <div className="p-6">
+        <h3 className="text-xl font-medium mb-4 text-center">Welcome to Lorepa</h3>
+        
+        {/* Phone Number Input */}
+        <div>
+          <PhoneInput
+            country={"us"}
+            value={phoneNumber}
+            onChange={handlePhoneChange}
+            inputStyle={{ width: "100%", padding: "10px", fontSize: "16px" }}
+            enableSearch
+          />
+          {!isValidPhone && (
+            <p className="text-red-500 text-sm">Invalid phone number</p>
+          )}
+          <button onClick={sendOtp} className="w-full bg-blue-500 text-white py-3 mt-2 rounded-lg">
+            Send OTP
+          </button>
+        </div>
 
-                        <div id="recaptcha-container"></div>
-                            <p className="text-sm text-gray-500 text-center mb-4">
-                                We’ll call or text you to confirm your number. Message and data
-                                rates may apply. <a href="#" className="text-blue-500" onClick={() => { navigate('/privacy'); setLoginModal(false); }}>Privacy Policy</a>
-                            </p>
-                            <div className="text-center mb-4">or</div>
-                            <GoogleLogin
-    onSuccess={async (response) => {
-        const userInfo = jwtDecode(response.credential);
-        console.log("Google User Info:", userInfo);
+        {/* OTP Verification */}
+        {confirmationResult && (
+          <div>
+            <input
+              type="text"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              className="border rounded p-2 w-full mt-4"
+              placeholder="Enter OTP"
+            />
+            <button onClick={verifyOtp} className="w-full bg-green-500 text-white py-3 mt-2 rounded-lg">
+              Verify OTP
+            </button>
+          </div>
+        )}
 
-        const userPayload = {
-            name: userInfo.name,
-            email: userInfo.email,
-            address: "123 Main Market Lahore", // You can allow users to edit this later
-            phone: "", // Leave empty for now, unless you capture it separately
-            password: "", // Password is not required for OAuth users
-            role: "owner", // Default role, change as needed
-            google_id: userInfo.sub, // Store Google ID for future authentication
-        };
+        <div id="recaptcha-container"></div>
 
-        try {
-            const response = await fetch("http://your-backend-url.com/api/register-google", {
+        {/* Privacy Policy */}
+        <p className="text-sm text-gray-500 text-center mt-4">
+          We’ll call or text you to confirm your number. Message and data rates may apply. 
+          <a href="#" className="text-blue-500" onClick={() => { navigate('/privacy'); setLoginModal(false); }}>
+            Privacy Policy
+          </a>
+        </p>
+
+        <div className="text-center my-4">or</div>
+
+        {/* Google Login */}
+        <GoogleLogin
+          onSuccess={async (response) => {
+            const userInfo = jwtDecode(response.credential);
+            console.log("Google User Info:", userInfo);
+
+            const userPayload = {
+              name: userInfo.name,
+              email: userInfo.email,
+              address: "123 Main Market Lahore",
+              phone: "",
+              password: "",
+              role: "owner",
+              google_id: userInfo.sub,
+            };
+
+            try {
+              const res = await fetch("http://your-backend-url.com/api/register-google", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userPayload),
-            });
+              });
 
-            const data = await response.json();
-            console.log("Backend Response:", data);
+              const data = await res.json();
+              console.log("Backend Response:", data);
 
-            if (data.success) {
-                setLoginModal(false); // Close modal on success
-                localStorage.setItem("token", data.token); // Store token for session management
+              if (data.success) {
+                setLoginModal(false);
+                localStorage.setItem("token", data.token);
+              }
+            } catch (error) {
+              console.error("Error sending data to backend:", error);
             }
-        } catch (error) {
-            console.error("Error sending data to backend:", error);
-        }
-    }}
-    onError={() => {
-        console.log("Login Failed");
-    }}
-     style={{
-            width: "250px", // Adjust width
-            height: "50px", // Adjust height
-            fontSize: "16px", // Adjust font size
-            borderRadius: "8px", // Add rounded corners
-        }}
-/>
+          }}
+          onError={() => console.log("Login Failed")}
+          style={{ width: "250px", height: "50px", fontSize: "16px", borderRadius: "8px" }}
+        />
 
+        {/* Social Login Buttons */}
+        <button className="w-full bg-white border py-3 text-lg rounded-lg flex items-center justify-center gap-2 mt-2">
+          <FontAwesomeIcon icon={faApple} className="mr-2" />
+          Continue with Apple
+        </button>
 
+        <button onClick={() => setEmailModal(true)} className="w-full bg-white border py-3 text-lg rounded-lg flex items-center justify-center gap-2 mt-2">
+          <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-black-500" />
+          Continue with Email
+        </button>
 
-                            <button className="w-full h-12 bg-white border py-2 text-lg rounded-lg flex items-center justify-center gap-2 mb-2">
-                                <FontAwesomeIcon icon={faApple} className="mr-3 " />
-                                Continue with Apple
-                            </button>
-                            <button onClick={() => setEmailModal(true)}  className="w-full bg-white h-12 border  text-lg py-2 rounded-lg flex items-center justify-center gap-2 mb-2">
+        {showEmailModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4">
+            <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+              <h2 className="text-2xl font-semibold mb-4 text-center">
+                {isRegistering ? "Register" : "Login"}
+              </h2>
 
-                                <FontAwesomeIcon icon={faEnvelope} className="mr-3 text-black-500" />
-                                Continue with Email
-                            </button>
-                            {showEmailModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
-                        <h2 className="text-2xl font-semibold mb-4">
-                            {isRegistering ? "Register" : "Login"}
-                        </h2>
+              {/* Email & Password Inputs */}
+              <input
+                type="email"
+                placeholder="Email"
+                className="border p-2 w-full mb-2"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
-                        {/* Email Input */}
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            className="border p-2 w-full mb-2"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+              <input
+                type="password"
+                placeholder="Password"
+                className="border p-2 w-full mb-2"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-                        {/* Password Input */}
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            className="border p-2 w-full mb-2"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+              {error && <p className="text-red-500 text-sm">{error}</p>}
 
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
+              {/* Login/Register Button */}
+              <button
+                onClick={isRegistering ? handleRegister : handleLogin}
+                className="w-full bg-blue-500 text-white py-3 rounded-lg mt-2"
+              >
+                {isRegistering ? "Register" : "Login"}
+              </button>
 
-                        {/* Login/Register Button */}
-                        <button
-                            onClick={isRegistering ? handleRegister : handleLogin}
-                            className="w-full bg-blue-500 text-white py-2 rounded mt-2"
-                        >
-                            {isRegistering ? "Register" : "Login"}
-                        </button>
+              {/* Toggle between Login and Register */}
+              <p className="text-sm text-blue-500 text-center mt-2 cursor-pointer" onClick={() => setIsRegistering(!isRegistering)}>
+                {isRegistering ? "Already have an account? Login" : "Don't have an account? Register"}
+              </p>
 
-                        {/* Toggle between Login and Register */}
-                        <p
-                            className="text-sm text-blue-500 text-center mt-2 cursor-pointer"
-                            onClick={() => setIsRegistering(!isRegistering)}
-                        >
-                            {isRegistering ? "Already have an account? Login" : "Don't have an account? Register"}
-                        </p>
+              <button className="text-gray-500 mt-4 w-1/3 text-center" onClick={() => setEmailModal(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        )}
 
-                        <button className="text-gray-500 mt-4" onClick={() => setEmailModal(false)}>
-                            Close
-                        </button>
-                    </div>
-                </div>
-            )}
-                            <button className="w-full bg-white h-12 border  text-lg py-2 rounded-lg flex items-center justify-center gap-2 ">
-                                <FontAwesomeIcon icon={faFacebook} className="ml-2 mr-2 text-blue-500" />
-                                Continue with Facebook
-                            </button>
-                        </div>
-                    </div>
-                </div>}
+        <button className="w-full bg-white border py-3 text-lg rounded-lg flex items-center justify-center gap-2 mt-2">
+          <FontAwesomeIcon icon={faFacebook} className="ml-2 mr-2 text-blue-500" />
+          Continue with Facebook
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
 
             {/* Spacer */}
@@ -348,66 +349,56 @@ const Navbar = () => {
             </div>
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="fixed absolute top-16 md:right-0 ml-4 bg-white shadow-lg w-1/6 py-4 m-2 rounded border border-200">
-                    <a
-                        onClick={() => {
-                            loginmodal();
-                            setIsOpen(false);
-                        }}
-                        href="#host"
-                        className="block px-6 py-2 no-underline ml-2 text-black no-underline font-md"
-                    >
-                        Login
-                    </a>
-                    <a
-                        onClick={() => {
-                            loginmodal();
-                            setIsOpen(false);
-                        }}
-                        href="#host"
-                        className="block px-6 py-2 no-underline ml-2 text-black no-underline font-md"
-                    >
-                        Registration
-                    </a>
-                    <div className="flex items-center px-6 text-gray-700 hover:bg-gray-100">
-<FaTrailer className="h-6 w-6"/>
-                        <a
-                            href="#host"
-                            className="ml-2 text-black no-underline font-md"
-                            onClick={() => { navigate('/becomehost'); setIsOpen(false) }}
-                        >
-                            Become a host
-                        </a>
-                    </div>
-                    <div className="flex items-center px-6 py-2 text-gray-700 hover:bg-gray-100">
-                        <img
-                            src={callcenter}
-                            alt="Call Center Icon"
-                            className="h-6 w-6"
-                        />
-                        <a
-                            href="#host"
-                            className="ml-2 text-black no-underline font-md"
-                            onClick={() => { navigate("/howLorepaWorks"); setIsOpen(false) }}
-                        >
-                            How Lorepa Works
-                        </a>
-                    </div>
-                    <div className="flex items-center px-6 py-2 text-gray-700 hover:bg-gray-100">
-                        <img
-                            src={contact}
-                            alt="Contact Icon"
-                            className="h-6 w-6"
-                        />
-                        <a
-                            href="#host"
-                            className="ml-2 text-black no-underline font-md"
-                        >
-                            Contact Customer Service
-                        </a>
-                    </div>
-                </div>
-            )}
+  <div className="fixed top-16 right-4 md:right-0 mx-auto bg-white shadow-lg w-full sm:w-64 md:w-1/6 py-4 rounded-lg border border-gray-200">
+    <a
+      onClick={() => {
+        loginmodal();
+        setIsOpen(false);
+      }}
+      className="block px-6 py-2 text-black font-md cursor-pointer hover:bg-gray-100"
+    >
+      Login
+    </a>
+    <a
+      onClick={() => {
+        loginmodal();
+        setIsOpen(false);
+      }}
+      className="block px-6 py-2 text-black font-md cursor-pointer hover:bg-gray-100"
+    >
+      Registration
+    </a>
+    <div className="flex items-center px-6 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+      <FaTrailer className="h-6 w-6" />
+      <span
+        className="ml-2 text-black font-md"
+        onClick={() => {
+          navigate("/becomehost");
+          setIsOpen(false);
+        }}
+      >
+        Become a Host
+      </span>
+    </div>
+    <div className="flex items-center px-6 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+      <img src={callcenter} alt="Call Center Icon" className="h-6 w-6" />
+      <span
+        className="ml-2 text-black font-md"
+        onClick={() => {
+          navigate("/howLorepaWorks");
+          setIsOpen(false);
+        }}
+      >
+        How Lorepa Works
+      </span>
+    </div>
+    <div className="flex items-center px-6 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+      <img src={contact} alt="Contact Icon" className="h-6 w-6" />
+      <span className="ml-2 text-black font-md">Contact Customer Service</span>
+    </div>
+  </div>
+)}
+
         </nav>
     );
 };

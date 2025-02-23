@@ -26,13 +26,19 @@ import TrailerRentalEstimator from "./components/rentestimator";
 import InsuranceFAQ from "./components/insurance";
 import InsuranceInfo from "./components/insurranceinfo";
 import SignUpCar from "./components/upcar";
+import CarDetailPage from "./components/carrental/detail";
+import MoreCarDetailPage from "./components/carrental/detail/moredetail";
+import TrailerDetails from "./components/carrental/detail/location";
+import MoreCarDetailInfo from "./components/carrental/detail/info";
 
 function ScrollToTop() {
+  const { pathname } = useLocation();
   React.useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [pathname]);
   return null;
 }
+
 
 function Layout({ children }) {
   const location = useLocation();
@@ -90,9 +96,17 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/categories" element={<CarRental />} />
+          <Route path="/car" element={
+            <>
+              <CarDetailPage />
+              <MoreCarDetailPage />
+              <TrailerDetails/>
+              <MoreCarDetailInfo/>
+            </>
+          } />
           <Route path="/becomehost" element={
             <>
-              <CarSharingBanner /> 
+              <CarSharingBanner />
               <TrailerRentalEstimator />
               <InsuranceFAQ />
               <InsuranceInfo />

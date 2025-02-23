@@ -72,7 +72,7 @@ const carsData = [
   },
 ];
 
-const CarRental = () => {
+const CarRental = ({navigation}) => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCars, setFilteredCars] = useState(carsData);
@@ -96,42 +96,10 @@ const CarRental = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const[showEmailModal,setEmailModal]=useState(false);
 
-  const suggestions = [
-    { category: "Position actuelle", icon: "📍", description: "Votre position actuelle" },
-    { category: "N'importe où", icon: "🌐", description: "Parcourir toutes les voitures" },
-    {
-      category: "Historique",
-      options: [
-        { name: "Lahore, Punjab", icon: "🕒" },
-      ],
-    },
-    {
-      category: "Villes",
-      options: [
-        { name: "Toronto", icon: "🏙️" },
-        { name: "Montréal", icon: "🏙️" },
-      ],
-    },
-    {
-      category: "Aéroports",
-      options: [
-        { name: "YYZ – Aéroport international Pearson de Toronto", icon: "✈️" },
-      ],
-    },
-  ];
-
-  const handleFocus = () => setShowDropdown(true);
-  const handleBlur = () => setTimeout(() => setShowDropdown(false), 200); // Delay to prevent immediate closing
+  ; // Delay to prevent immediate closing
   const [place, setPlace] = useState(null);
 
-  const handleSearch = (event) => {
-    const value = event.target.value.toLowerCase();
-    setSearchQuery(value);
-    const filtered = carsData.filter((car) =>
-      car.name.toLowerCase().includes(value)
-    );
-    setFilteredCars(filtered);
-  };
+
    const handleScroll = () => {
           if (window.scrollY > 50) {
               setShowSearchBar(true); // Show search bar when scrolled down
@@ -226,41 +194,7 @@ const CarRental = () => {
             className="h-30 w-40"
           />
         </a>
-        {showDropdown &&
-          <div className="absolute top-full ml-[150px] bg-white shadow-lg rounded-lg z-10 p-4">
-            {suggestions.map((section, index) => (
-              <div key={index} className="">
-                <p className="text-sm font-semibold text-gray-500">{section.category}</p>
-                {section.options ? (
-                  section.options.map((option, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3  hover:bg-gray-100 cursor-pointer rounded"
-                      onClick={() => setQuery(option.name)}
-                    >
-                      <span className="text-xl">{option.icon}</span>
-                      <span>{option.name}</span>
-                    </div>
-                  ))
-                ) : (
-                  <div
-                    className="flex items-center gap-3  hover:bg-gray-100 cursor-pointer rounded"
-                    onClick={() => setQuery(section.description)}
-                  >
-                    <span className="text-xl">{section.icon}</span>
-                    <div>
-                      <p className="font-medium">{section.category}</p>
-                      <p className="text-sm text-gray-500">{section.description}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-            <p className="text-xs text-center text-gray-500 ">
-              powered by <span className="text-blue-500">Google</span>
-            </p>
-          </div>
-        }
+       
 
 
 {loginModal &&
@@ -679,6 +613,7 @@ const CarRental = () => {
           {filteredCars.map((car) => (
             <div
               key={car.id}
+              onClick={()=>navigate('/car')}
               className="bg-white p-4 rounded-lg shadow-md flex items-center gap-4 mb-4"
             >
               {/* Reduce Image Size */}

@@ -37,47 +37,34 @@ const TrailerData = [
       {/* Blog Title */}
       <div className="max-w-4xl">
         <h1 className="text-6xl font-bold text-gray-800 text-center mb-6">
-          Turo vs. Towlos: An In-Depth Comparison
+         Lorepa .vs Towlos: An In-Depth Comparison
         </h1>
-        <div className="text-gray-500 text-lg flex ml-16 space-x-2 mb-8">
-          <span className="flex items-center">
-            <img
-              src="https://towlos.com/blog/wp-content/uploads/2023/08/apple-touch-icon-1.png"
-              alt="Author"
-              className="w-8 h-8 mr-1"
-            />
-            <span className="text-red-500">By towlosblog</span>
-          </span>
-          <span>•</span>
-          <span>Posted on February 20, 2024</span>
-          <span>•</span>
-          <span className="text-blue-500 cursor-pointer">Towlos U</span>
-        </div>
+        
 
         {/* Blog Introduction */}
         <p className="text-xl text-gray-700 mb-8 text-center">
           Peer-to-peer marketplaces are a common way to make money these days.
-          From Airbnb and VRBO to Turo and Towlos—there are plenty of
+          From Airbnb and VRBO to Lorepa and Towlos—there are plenty of
           opportunities for repurposing assets to generate cash! In this blog,
-          we will compare Turo and Towlos as a profitable side hustle.
+          we will compare Lorepa and Towlos as a profitable side hustle.
         </p>
 
         {/* Comparison Sections */}
         <div className="space-y-10">
-          {/* Turo Section */}
+          {/* Lorepa Section */}
           <div>
-            <h2 className="text-4xl font-semibold text-gray-800 mb-4">Turo</h2>
+            <h2 className="text-4xl font-semibold text-gray-800 mb-4">Lorepa</h2>
             <p className="text-xl text-gray-700">
-              Turo operates as a car-sharing network, similar to Airbnb but for
+              Lorepa operates as a car-sharing network, similar to Airbnb but for
               cars, offering a wide range of over 800 makes and models. Renters
               can select various additional features such as car seats and
               pickup locations. Car owners also set their requirements, such as
               mileage limits and minimum renter age. With prices advertised as
-              up to 35% less than traditional rental companies, Turo presents a
-              cost-effective option for renters. Hosts on Turo can earn an
+              up to 35% less than traditional rental companies, Lorepa presents a
+              cost-effective option for renters. Hosts on Lorepa can earn an
               average of $500 per month for one car, and the platform offers
               additional insurance options for both renters and owners. However,
-              Turo’s service does have limitations, such as not supporting
+              Lorepa’s service does have limitations, such as not supporting
               one-way trips and typically having mileage limitations set by car
               owners.
             </p>
@@ -109,12 +96,12 @@ const TrailerData = [
           <div className="max-w-6xl w-full">
         {/* Title */}
         <h1 className="text-5xl font-bold text-gray-800  mb-6">
-          Turo vs. Lorepa
+        Lorepa vs. Towlos
         </h1>
 
         {/* Conclusion */}
         <p className="text-xl text-gray-700 mb-6">
-          In conclusion, while Turo offers a broader car rental service with
+          In conclusion, while Lorepa offers a broader car rental service with
           its own set of benefits, investing in a trailer to become a Towlos
           host presents a more accessible and potentially more profitable
           venture, especially if you are looking into a peer-to-peer marketplace
@@ -130,7 +117,7 @@ const TrailerData = [
 </div>
           <div className="mt-12">
             <h2 className="text-4xl font-semibold text-gray-800 mb-6">
-              Turo Return on Investment
+              Lorepa Return on Investment
             </h2>
             <div className="overflow-x-auto">
             <table className="table-fixed border-collapse border border-slate-400 w-full text-gray-800">
@@ -182,13 +169,13 @@ const TrailerData = [
             </div>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
-              *Car Prices Found Using Kelly Blue Book **Average Daily Rate Noted on Turo.com
+              *Car Prices Found Using Kelly Blue Book **Average Daily Rate Noted on Lorepa.com
             </p>
            
           </div>
           <div className="mt-12">
           <h2 className="text-4xl font-semibold text-gray-800 mb-6">
-              Turo Return on Investment
+              Lorepa Return on Investment
             </h2>
             <div className="overflow-x-auto">
             <table className="table-fixed border-collapse border border-slate-400 w-full text-gray-800">
@@ -220,7 +207,7 @@ const TrailerData = [
             </div>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
-              *Average Daily Rate Noted on Turo.com
+              *Average Daily Rate Noted on Lorepa.com
             </p>
            
           </div>

@@ -11,6 +11,7 @@ const HomePage = () => {
     const [showDepartureCalendar, setShowDepartureCalendar] = useState(false);
     const [showArrivalCalendar, setShowArrivalCalendar] = useState(false);
     const [place, setPlace] = useState(null);
+     
     
     
 
@@ -49,14 +50,14 @@ const HomePage = () => {
         <div className="bg-cover bg-center h-screen bg-no-repeat bg-opacity-50 flex flex-col items-center text-white"
             style={{ backgroundImage: `url(${require("../../assets/main.png")})` }}
         >
-            <div className="md:text-5xl font-extrabold tracking-wide mt-24">Find Your Ideal RV</div>
-            <h5 className="text-lg mt-4 mb-8">
+            <div className="md:text-5xl font-extrabold tracking-wide mt-20">Find Your Ideal RV</div>
+            <h5 className="text-lg mt-2 mb-8">
                 Discover the best trailers and motorhomes for your RV adventure
             </h5>
 
-            <div className="bg-white shadow-lg md:w-[1200px] mx-auto p-3 md:p-6 rounded-2xl">
+            <div className="bg-white shadow-lg md:w-[1200px] mx-auto p-3 md:p-3 rounded-2xl">
     {/* Tabs Section */}
-    <div className="relative shadow-lg flex flex-wrap items-center h-auto text-md rounded-lg p-4">
+    <div className="relative shadow-lg flex flex-wrap items-center h-auto text-md rounded-lg p-2">
         <div className="flex flex-wrap gap-x-10 md:gap-x-10 md:ps-72">
             {tabs.map((tab, index) => (
                 <a
@@ -82,10 +83,10 @@ const HomePage = () => {
     </div>
 
     {/* Search Bar */}
-    <div className="flex flex-col md:flex-row items-center md:items-center mt-6 bg-gray-100 rounded-2xl shadow-md gap-4">
+    <div className="flex flex-col md:flex-row items-center md:items-center mt-4 bg-gray-100 rounded-2xl shadow-md gap-4">
         {/* Place Search */}
         <div className="flex-1 border-b md:border-b-0 md:border-r border-gray-300 w-full md:w-auto">
-            <label className="block text-xs text-gray-500 mb-1">Place</label>
+            <label className="block text-xs text-gray-500 mt-2 ml-2">Place</label>
             <GooglePlacesAutocomplete
                 key={activeTab}
                 apiKey={process.env.REACT_APP_API_KEYS}

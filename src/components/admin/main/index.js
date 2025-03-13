@@ -14,8 +14,11 @@ import VerificationData from "../verification";
 import BookingReport from "./bookingreport";
 import ManageCars from "../managecars/all car";
 import AddNewCar from "../managecars/add car/content";
+import { useLocation } from "react-router-dom";
 
 export default function Dashboard() {
+  const location = useLocation();
+  const user = location.state || JSON.parse(localStorage.getItem("user"));
   const [activePage, setActivePage] = useState("dashboard");
   const [carDropdownOpen, setCarDropdownOpen] = useState(false);
   const [hideSidebar, setHideSidebar] = useState(false);
@@ -66,9 +69,11 @@ export default function Dashboard() {
         <aside className="w-96 bg-blue-900 text-white p-5 flex flex-col">
           <div className="flex flex-col items-center mb-5">
             <div className="w-20 h-20 bg-gray-700 rounded-full mb-2"></div>
-            <span className="bg-green-500 text-white px-2 py-1 rounded text-sm">Administrator</span>
-            <h2 className="mt-2 text-lg">System Admin</h2>
-            <p className="text-gray-400 text-sm">Member Since Aug 2023</p>
+            <span className="bg-green-500 text-white px-2 py-1 rounded text-sm">{user?.role || "Administrator"}</span>
+            <h2 className="mt-2 text-lg">{user?.name || "Guest User"}</h2>
+            <p className="text-gray-400 text-sm">
+            Member Since {user?.created_at ? new Date(user.created_at).toLocaleDateString() : "N/A"}
+            </p>
           </div>
           <nav className="space-y-3">
             {Object.entries(pages).map(([key, { name, icon }]) => (
@@ -166,14 +171,14 @@ export default function Dashboard() {
           </>
         )}
 
-        {activePage === "bookingHistory" && <BookingHistory />}
-        {activePage === "allCars" && <ManageCars />}
-        {activePage === "addCar" && <AddNewCar />}
-        {activePage === "profile" && <Settings />}
-        {activePage === "manageNews" && <ManageNews />}
-        {activePage === "changePassword" && <ChangePassword />}
-        {activePage === "verifications" && <VerificationData />}
-        {activePage === "bookingReport" && <BookingReport />}
+        {activePage === "bookingHistory" && <BookingHistory user={user}/>}
+        {activePage === "allCars" && <ManageCars user={user}/>}
+        {activePage === "addCar" && <AddNewCar user={user}/>}
+        {activePage === "profile" && <Settings user={user} />}
+        {activePage === "manageNews" && <ManageNews user={user}/>}
+        {activePage === "changePassword" && <ChangePassword user={user}/>}
+        {activePage === "verifications" && <VerificationData user={user}/>}
+        {activePage === "bookingReport" && <BookingReport user={user}/>}
 
         {activePage !== "dashboard" &&
           activePage !== "bookingHistory" &&

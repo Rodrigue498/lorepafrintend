@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookingHistory = () => {
+const BookingHistory = ({user}) => {
   const bookings = [
     {
       type: "car",

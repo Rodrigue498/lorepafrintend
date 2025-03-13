@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookingReport = () => {
+const BookingReport = ({user}) => {
   const bookings = []; // Empty array to simulate no bookings
 
   return (

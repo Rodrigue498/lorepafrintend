@@ -15,25 +15,25 @@ const AboutUs = () => {
               WHO ARE WE?
             </h1>
             <img
-              src={require("../../assets/city1.png")}
+              src={require("../../assets/city1.jpg")}
               alt="Trailer Example"
               className="rounded-lg shadow-md w-full max-w-md h-auto mt-6"
             />
           </div>
 
           {/* Right Side - Images & Text */}
-          <div className="lg:col-span-2 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+          <div className="lg:col-span-2 space-y-6 md:mt-12 flex flex-col items-center lg:items-start text-center lg:text-left">
             {/* Two Side-by-Side Images */}
             <div className="flex flex-col md:flex-row gap-4 mt-6 w-full justify-center lg:justify-start">
               <img
-                src={require("../../assets/cities.png")}
+                src={require("../../assets/cities.jpg")}
                 alt="City View 1"
-                className="rounded-lg shadow-md w-full md:w-1/2 h-auto"
+                className="rounded-lg shadow-md w-full md:w-1/2 md:h-96 h-auto"
               />
               <img
-                src={require("../../assets/city2.png")}
+                src={require("../../assets/city2.jpeg")}
                 alt="City View 2"
-                className="rounded-lg shadow-md w-full md:w-1/2 h-auto"
+                className="rounded-lg shadow-md w-full md:w-1/2 md:h-96 h-auto"
               />
             </div>
 

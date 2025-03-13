@@ -1,6 +1,6 @@
 import React from "react";
 
-const VerificationData = () => {
+const VerificationData = ({user}) => {
   const data = [
     { label: "Phone", value: "N/A", status: "Not Verified" },
     { label: "ID Card *", value: "N/A", status: "Not Verified" },

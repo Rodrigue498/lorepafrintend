@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function ManageNews() {
+export default function ManageNews({user}) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 

@@ -2,14 +2,19 @@ import React from "react";
 
 const BlogPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      
-        <img
-          src="https://towlos.com/blog/wp-content/uploads/2024/02/Turo-1-1024x750.jpg"
-          alt="Turo vs Towlos"
-          className="w-full h-auto rounded-lg shadow-lg"
-        />
-    
+    <div 
+      className="relative flex   min-h-screen justify-center bg-gray-100"
+      style={{
+        backgroundImage: `url(${require("../../assets/turo.jpeg")})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Text Overlay on Right */}
+      <div className=" bg-opacity-80   rounded-lg shadow-lg mr-10">
+        <h1 className="text-[200px] text-white">Lorepa vs Towlos</h1>
+      </div>
     </div>
   );
 };

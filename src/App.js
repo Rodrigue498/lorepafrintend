@@ -5,6 +5,7 @@ import FooterScreen from "./components/footerscreen";
 import HomePage from "./components/homepage";
 import TrailerRentalPage from "./components/trailer";
 import TrailerCategories from "./components/trailercategorie";
+import ChangePassword from "./components/admin/password";
 import TopDestinations from "./components/Destination";
 import TrailerRental from "./components/rentals";
 import TrailerSection from "./components/trailersection";
@@ -30,6 +31,7 @@ import CarDetailPage from "./components/carrental/detail";
 import MoreCarDetailPage from "./components/carrental/detail/moredetail";
 import TrailerDetails from "./components/carrental/detail/location";
 import MoreCarDetailInfo from "./components/carrental/detail/info";
+import Reviews from "./components/carrental/detail/review";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -87,6 +89,7 @@ function App() {
             </>
           } />
           <Route path="/termofuse" element={<TermsOfUse />} />
+          <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/learnmore" element={
             <>
               <BlogPage />
@@ -102,6 +105,7 @@ function App() {
               <MoreCarDetailPage />
               <TrailerDetails/>
               <MoreCarDetailInfo/>
+              <Reviews/>
             </>
           } />
           <Route path="/becomehost" element={

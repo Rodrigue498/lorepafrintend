@@ -5,9 +5,11 @@ const AttributesForm = ({ formData = { attributes: {} }, setFormData, onNext }) 
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      attributes: { ...prev.attributes, [name]: value },
+      [name]: value, // ✅ This ensures `max_payload` is updated correctly
+      attributes: { ...prev.attributes, [name]: value }, 
     }));
   };
+  
 
   const handleNext = () => {
     onNext({ attributes: formData.attributes });
@@ -19,15 +21,46 @@ const AttributesForm = ({ formData = { attributes: {} }, setFormData, onNext }) 
         <h2 className="text-lg font-semibold mb-4">Attributes</h2>
 
         {/* Color Input */}
-        <label className="block text-gray-700 mb-2">Color</label>
+        <label className="block text-gray-700 mb-2">Price</label>
         <input
           type="text"
-          name="color"
-          value={formData.attributes.color || ""}
+          name="price"
+          value={formData?.attributes?.price|| ""}
           onChange={handleChange}
-          className="w-full border-gray-300 rounded-lg shadow-sm p-2"
-          placeholder="Enter color"
+          className="w-full border-gray-300 rounded-lg shadow-sm p-2 mb-4"
+          placeholder="Enter Price"
         />
+         <label className="block text-gray-700 mb-2">Trailer brakes</label>
+        <input
+          type="text"
+          name="trailer_brakes"
+          value={formData?.attributes?.trailer_brakes|| ""}
+          onChange={handleChange}
+          className="w-full border-gray-300 rounded-lg shadow-sm p-2 mb-4"
+          placeholder="Enter Trailer brakes"
+        />
+         <label className="block text-gray-700 mb-2">Hitch ball size</label>
+        <input
+          type="text"
+          name="hitch_ball_size"
+          value={formData?.attributes?.hitch_ball_size|| ""}
+          onChange={handleChange}
+          className="w-full border-gray-300 rounded-lg shadow-sm p-2 mb-4"
+          placeholder="Enter Hitch ball size"
+        />
+                <label className="block text-gray-700 mb-2">Max Payload</label>
+<input
+  type="text"
+  name="max_payload"
+  value={formData?.attributes?.max_payload || ""}
+  onChange={handleChange}
+  className="w-full border-gray-300 rounded-lg shadow-sm p-2 mb-4"
+  placeholder="Enter Max Payload"
+/>
+
+
+        
+
 
         <button
           onClick={handleNext}

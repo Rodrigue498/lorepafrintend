@@ -2,7 +2,8 @@ import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 
-const MoreCarDetailPage = () => {
+const MoreCarDetailPage = ({trailer}) => {
+  
   const [pickup, setPickup] = useState(true);
   const[isOpen,setIsOpen]=useState(false)
   const [quantity, setQuantity] = useState(0);
@@ -22,35 +23,35 @@ const MoreCarDetailPage = () => {
       {/* Left Section - Details */}
       <div className="flex-1">
         <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">Car Hauler</span>
-        <h1 className="text-3xl font-bold mt-2">2025 PJ B5 20’ Car Hauler “Timmy”</h1>
-        <p className="text-gray-600 mt-1">3 Trips</p>
+        <h1 className="text-3xl font-bold mt-2">{trailer?.title}</h1>
+        <p className="text-gray-600 mt-1">{trailer?.review}</p>
 
         {/* Trailer Specs */}
         <div className="bg-gray-100 p-4 rounded-lg mt-4 grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
           <div>
             <p className="text-gray-500 text-sm">Connector</p>
-            <p className="text-lg font-semibold">7-WAY</p>
+            <p className="text-lg font-semibold">{trailer?.connector_type}WAY</p>
           </div>
           <div>
             <p className="text-gray-500 text-sm">Trailer Brakes</p>
-            <p className="text-lg font-semibold">YES</p>
+            <p className="text-lg font-semibold">{trailer?.trailer_brakes}</p>
           </div>
           <div>
             <p className="text-gray-500 text-sm">Hitch Ball Size</p>
-            <p className="text-lg font-semibold">2 5/16 IN.</p>
+            <p className="text-lg font-semibold">{trailer?.hitch_ball_size} IN.</p>
           </div>
           <div>
             <p className="text-gray-500 text-sm">Trailer Weight</p>
-            <p className="text-lg font-semibold">2500 LBS</p>
+            <p className="text-lg font-semibold">{trailer?.title} LBS</p>
           </div>
           <div>
             <p className="text-gray-500 text-sm">Max Payload</p>
-            <p className="text-lg font-semibold">7000 LBS</p>
+            <p className="text-lg font-semibold">{trailer?.max_payload} LBS</p>
           </div>
         </div>
 
         {/* Description */}
-        <h2 className="text-xl font-bold mt-6">DESCRIPTION</h2>
+        <h2 className="text-xl font-bold mt-6">{trailer?.description}</h2>
         <ul className="mt-2 text-gray-700 list-disc pl-4">
           <li>Brand New 20’ Heavy Duty Car/Buggy Hauler</li>
           <li>Super Wide 102” Deck</li>
@@ -66,8 +67,8 @@ const MoreCarDetailPage = () => {
 
       {/* Right Section - Booking */}
       <div className="w-full md:w-1/3 bg-gray-50 p-6 rounded-lg shadow-md">
-        <p className="text-2xl font-bold">$100 <span className="text-gray-500 text-lg">/ day</span></p>
-        <p className="text-sm text-gray-600">$100 est total*</p>
+        <p className="text-2xl font-bold">${trailer?.price_per_day?.single_day} <span className="text-gray-500 text-lg">/ day</span></p>
+        <p className="text-sm text-gray-600">{trailer?.title} est total*</p>
 
         {/* Date Picker */}
         <div className="flex gap-2 mt-4">

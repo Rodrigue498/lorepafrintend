@@ -95,7 +95,7 @@ export default function Settings({ user }) {
       <div className="mx-auto bg-white p-6 rounded-lg shadow">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold">Settings</h2>
-          <Button variant="outline" icon={<Lock />}>Change Password</Button>
+          <Button variant="outline" icon={<Lock />} >Change Password</Button>
         </div>
 
         <div className="grid grid-cols-2 gap-6">

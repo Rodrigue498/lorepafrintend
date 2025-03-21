@@ -32,6 +32,7 @@ import MoreCarDetailPage from "./components/carrental/detail/moredetail";
 import TrailerDetails from "./components/carrental/detail/location";
 import MoreCarDetailInfo from "./components/carrental/detail/info";
 import Reviews from "./components/carrental/detail/review";
+import { CarDetailWrapper } from "./components/carrental/detail/wrapper";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -99,14 +100,10 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/categories" element={<CarRental />} />
-          <Route path="/car" element={
+          <Route path="/car/:id" element={
             <>
-              <CarDetailPage />
-              <MoreCarDetailPage />
-              <TrailerDetails/>
-              <MoreCarDetailInfo/>
-              <Reviews/>
-            </>
+              <CarDetailWrapper/>
+              </>
           } />
           <Route path="/becomehost" element={
             <>

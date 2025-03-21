@@ -12,7 +12,20 @@ const HomePage = () => {
     const [showArrivalCalendar, setShowArrivalCalendar] = useState(false);
     const [place, setPlace] = useState(null);
      
-    
+    const handleSearch = () => {
+        if (!place || !departureDate || !arrivalDate) {
+            alert("Please select all fields before searching.");
+            return;
+        }
+
+        const queryParams = new URLSearchParams({
+            place: place.label,
+            departure: departureDate.toISOString(),
+            arrival: arrivalDate.toISOString(),
+        }).toString();
+
+        navigate(`/trailers?${queryParams}`);
+    };
     
 
     const movingBarRef = useRef(null);
@@ -202,7 +215,7 @@ const HomePage = () => {
 
         {/* Search Button */}
         <div className="py-2 w-full md:w-auto text-center md:text-left">
-            <button className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 focus:outline-none">
+            <button onClick={handleSearch} className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 focus:outline-none">
                 Search
             </button>
         </div>

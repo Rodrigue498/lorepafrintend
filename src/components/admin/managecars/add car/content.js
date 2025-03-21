@@ -11,15 +11,16 @@ const AddNewCar = ({ user }) => {
     title: "",
     description: "",
     type: "",
-    features: "",
+    features: [],
     size: "",
-    capacity: "",
-    available: false,
+    trailer_weight:"",
+    max_payload:"",
+    connector_type:"",
+    trailer_brakes:"",
+    available:true,
     price: "",
     images: [],
-    location: {},
-    pricing: {},
-    attributes: {},
+    location: {}
   });
 
   const API_URL = process.env.REACT_APP_API_URL;
@@ -29,7 +30,7 @@ const AddNewCar = ({ user }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value, // Ensure all fields are properly assigned
+      [name]: name === "features" ? value.split(",").map(f => f.trim()) : value, // ✅ Ensure features is always an array
     }));
   };
   
@@ -47,8 +48,8 @@ const AddNewCar = ({ user }) => {
 
   // Move to next tab
   const handleNext = (stepData) => {
-    saveStepData(stepData);
-    if (activeTab < 4) {
+    saveStepData({ attributes: { ...formData.attributes, ...stepData.attributes } });
+    if (activeTab < 3) {
       setActiveTab(activeTab + 1);
     } else {
       handleSubmit(); // Final submission when last step is completed
@@ -56,25 +57,33 @@ const AddNewCar = ({ user }) => {
   };
 
   // Handle Form Submission after all tabs are completed
+
   const handleSubmit = async () => {
     const formDataToSend = new FormData();
+    console.log("Submitting formData:", formData);
+  
     Object.entries(formData).forEach(([key, value]) => {
       if (key === "images") {
         value.forEach((file) => formDataToSend.append("images[]", file));
-      } else if (typeof value === "object") {
-        formDataToSend.append(key, JSON.stringify(value)); // Convert objects to JSON
+      } else if (key === "features" && Array.isArray(value)) {
+        value.forEach((feature) => formDataToSend.append("features[]", feature)); 
+        } else if (key === "available") {
+          formDataToSend.append("available", formData.available ? true : false);
+        }
+        else if (typeof value === "object") {
+        formDataToSend.append(key, JSON.stringify(value)); 
       } else {
         formDataToSend.append(key, value);
       }
     });
-
+  
     try {
       const response = await axios.post(`${API_URL}/trailers/create`, formDataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
+  
       alert("Car added successfully!");
       console.log(response.data);
     } catch (error) {
@@ -82,6 +91,8 @@ const AddNewCar = ({ user }) => {
       alert(error.response?.data?.message || "Failed to add car");
     }
   };
+  
+  
 
   return (
     <div className="bg-gray-100 p-8">
@@ -90,7 +101,7 @@ const AddNewCar = ({ user }) => {
 
         {/* Tabs */}
         <div className="border-b border-gray-300 mb-6 flex">
-          {["Content", "Locations", "Pricing", "Attributes"].map((tab, index) => (
+          {["Content", "Locations", "Attributes"].map((tab, index) => (
             <button
               key={index}
               className={`flex-1 text-center py-2 text-sm font-medium ${
@@ -157,6 +168,35 @@ const AddNewCar = ({ user }) => {
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
               />
             </div>
+            <div className="mb-4">
+              <label htmlFor="features" className="block text-sm font-medium text-gray-700">
+              types
+              </label>
+              <input
+                type="text"
+                id="type"
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                placeholder="Enter your type of vehicle"
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              />
+            </div>
+            
+            <div className="mb-4">
+              <label htmlFor="features" className="block text-sm font-medium text-gray-700">
+                Size of trailer
+              </label>
+              <input
+                type="text"
+                id="size"
+                name="size"
+                value={formData.size}
+                onChange={handleChange}
+                placeholder="Enter features"
+                className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+              />
+            </div>
 
             {/* Upload Image */}
             <div>
@@ -183,8 +223,7 @@ const AddNewCar = ({ user }) => {
         )}
 
         {activeTab === 2 && <AddCarForm formData={formData} setFormData={setFormData} onNext={handleNext} />}
-        {activeTab === 3 && <PricingForm formData={formData} setFormData={setFormData} onNext={handleNext} />}
-        {activeTab === 4 && <AttributesForm formData={formData} setFormData={setFormData} onNext={handleNext} />}
+        {activeTab === 3 && <AttributesForm formData={formData} setFormData={setFormData} onNext={handleNext} />}
       </div>
     </div>
   );

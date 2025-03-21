@@ -1,13 +1,28 @@
 import React from "react";
 
-const AddCarForm = ({ formData = { location: {} }, setFormData, onNext }) => {
+const AddCarForm = ({ formData, setFormData, onNext }) => {
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      location: { ...prev.location, [name]: value },
-    }));
+    const { name, value, type } = e.target;
+    let newValue = type === "number" ? Number(value) : value;
+  
+    setFormData((prev) => {
+      
+   if (["address"].includes(name)) {
+        return {
+          ...prev,
+          location: {
+            ...prev.location,
+            [name]: newValue,
+          },
+        };
+      }
+      return { ...prev, [name]: newValue };
+    });
   };
+  
+  
+  
+  
 
   const handleUseCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -30,7 +45,7 @@ const AddCarForm = ({ formData = { location: {} }, setFormData, onNext }) => {
   };
 
   const handleNext = () => {
-    onNext({ location: formData.location });
+    onNext(formData); // ✅ Pass entire formData to preserve all data
   };
 
   return (
@@ -38,28 +53,50 @@ const AddCarForm = ({ formData = { location: {} }, setFormData, onNext }) => {
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Locations</h2>
 
-        {/* Location Dropdown */}
+        {/* Location Input */}
         <label className="block text-gray-700 mb-2">Location</label>
-        <select
-          name="place"
-          value={formData.location.place || ""}
-          onChange={handleChange}
-          className="w-full border-gray-300 rounded-lg shadow-sm"
-        >
-          <option value="">-- Please Select --</option>
-          <option value="location1">Location 1</option>
-          <option value="location2">Location 2</option>
-        </select>
-
-        {/* Real Address Input */}
-        <label className="block text-gray-700 mb-2 mt-4">Real Address</label>
         <input
           type="text"
-          name="realAddress"
-          value={formData.location.location || ""}
+          name="address"
+          value={formData?.location?.address || ""}
           onChange={handleChange}
-          className="w-full border-gray-300 rounded-lg shadow-sm"
+          className="w-full border-gray-300 rounded-lg shadow-sm p-2"
         />
+
+        {/* Trailer Availability */}
+        <label className="block text-gray-700 mb-2 mt-4">Is Trailer Available?</label>
+        <select
+  name="available"
+  value={formData?.available?.toString()} // ✅ Ensure value is converted to a string for the select field
+  onChange={handleChange}
+  className="w-full border-gray-300 rounded-lg shadow-sm p-2"
+>
+  <option value="">-- Select --</option>
+  <option value="true">true</option>
+  <option value="false">false</option>
+</select>
+
+
+        {/* Trailer Weight */}
+        <label className="block text-gray-700 mb-2 mt-4">Trailer Weight (kg)</label>
+        <input
+  type="number"
+  name="trailer_weight"
+  value={formData?.trailer_weight || ""} // ✅ Use root-level trailer_weight
+  onChange={handleChange}
+  className="w-full border-gray-300 rounded-lg shadow-sm p-2"
+/>
+
+
+        {/* Connector Type */}
+        <label className="block text-gray-700 mb-2 mt-4">Connector Type</label>
+        <input
+  type="text"
+  name="connector_type"
+  value={formData?.connector_type || ""} // ✅ Correctly references location.connector_type
+  onChange={handleChange}
+  className="w-full border-gray-300 rounded-lg shadow-sm p-2"
+/>
 
         {/* Use Current Location Button */}
         <button
@@ -69,18 +106,21 @@ const AddCarForm = ({ formData = { location: {} }, setFormData, onNext }) => {
           Use Current Location
         </button>
 
-        {formData.location.latitude && formData.location.longitude && (
+        {formData?.location?.latitude && formData?.location?.longitude && (
           <p className="mt-2 text-gray-600">
-            📍 Location: {formData.location.latitude}, {formData.location.longitude}
+            📍 Location: {formData?.location?.latitude}, {formData?.location?.longitude}
           </p>
         )}
 
-        <button
-          onClick={handleNext}
-          className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg"
-        >
-          Next
-        </button>
+        {/* Next Button */}
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={handleNext}
+            className="bg-blue-600 text-white font-medium py-2 px-6 rounded-lg shadow hover:bg-blue-700"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

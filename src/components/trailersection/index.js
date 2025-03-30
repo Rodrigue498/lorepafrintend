@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const TrailerSection = () => {
+  const navigate=useNavigate();
   return (
     <div className="bg-gray-100 py-12 px-4 md:px-0">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6">
@@ -23,7 +25,7 @@ const TrailerSection = () => {
               Skip the rental counter, find the trailer that suits you, and start your adventure.
             </p>
             <div className="flex justify-center">
-              <button className="bg-white text-base sm:text-lg w-11/12 sm:w-96 h-12 text-black px-6 py-2 rounded-full hover:bg-gray-700 hover:text-white border-0">
+              <button className="bg-white text-base sm:text-lg w-11/12 sm:w-96 h-12 text-black px-6 py-2 rounded-full hover:bg-gray-700 hover:text-white border-0"  onClick={() => navigate('/categories')}>
                 Rent a Trailer
               </button>
             </div>
@@ -49,7 +51,7 @@ const TrailerSection = () => {
               Earn extra income with your trailer or start your own business and earn with the system.
             </p>
             <div className="flex justify-center">
-              <button className="bg-white text-base sm:text-lg w-11/12 sm:w-96 h-12 text-black px-6 py-2 rounded-full hover:bg-gray-700 hover:text-white border-0">
+              <button className="bg-white text-base sm:text-lg w-11/12 sm:w-96 h-12 text-black px-6 py-2 rounded-full hover:bg-gray-700 hover:text-white border-0"  onClick={() => navigate('/becomehost')}>
                 Become a Host
               </button>
             </div>

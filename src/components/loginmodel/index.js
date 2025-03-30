@@ -61,17 +61,13 @@ const LoginModal = () => {
                 Continue with Google
               </button>
               <button className="w-full border py-2 rounded flex items-center justify-center gap-2 mb-2">
-                <img src="apple-logo.png" alt="Apple" className="w-5" />
-                Continue with Apple
-              </button>
-              <button className="w-full border py-2 rounded flex items-center justify-center gap-2 mb-2">
                 <img src="email-icon.png" alt="Email" className="w-5" />
                 Continue with Email
               </button>
-              <button className="w-full border py-2 rounded flex items-center justify-center gap-2">
+              {/* <button className="w-full border py-2 rounded flex items-center justify-center gap-2">
                 <img src="facebook-logo.png" alt="Facebook" className="w-5" />
                 Continue with Facebook
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

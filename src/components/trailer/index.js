@@ -27,10 +27,10 @@ const TrailerRentalPage = () => {
                             book any type of trailer from private individuals, whatever <br />
                             the occasion, with a dynamic community of trusted hosts.
                         </p>
-                        <div className="flex flex-col items-center lg:items-start">
+                        <div className="flex flex-col items-center justify-center lg:items-center">
                             {/* Avatar group */}
-                            <div className="flex -space-x-2 mb-4">
-                                {[1, 2, 3, 4, 5, 6].map((_, index) => (
+                            <div className="flex -space-x-2 mb-4 items-center justify-center">
+                                {[1, 2, 3, 4].map((_, index) => (
                                     <img
                                         key={index}
                                         className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white"

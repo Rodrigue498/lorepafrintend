@@ -3,61 +3,33 @@ import { FaSearch } from "react-icons/fa";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { useNavigate } from 'react-router-dom';
+
 
 const HomePage = () => {
-    const [activeTab, setActiveTab] = useState("search");
+    const navigate = useNavigate();
     const [departureDate, setDepartureDate] = useState(null);
     const [arrivalDate, setArrivalDate] = useState(null);
     const [showDepartureCalendar, setShowDepartureCalendar] = useState(false);
     const [showArrivalCalendar, setShowArrivalCalendar] = useState(false);
     const [place, setPlace] = useState(null);
-     
-    const handleSearch = () => {
-        if (!place || !departureDate || !arrivalDate) {
-            alert("Please select all fields before searching.");
-            return;
-        }
 
-        const queryParams = new URLSearchParams({
-            place: place.label,
-            departure: departureDate.toISOString(),
-            arrival: arrivalDate.toISOString(),
-        }).toString();
+const handleSearch = (navigate) => {
+    if (!place || !departureDate || !arrivalDate) {
+        alert("Please select all fields before searching.");
+        return;
+    }
 
-        navigate(`/trailers?${queryParams}`);
-    };
+    const queryParams = new URLSearchParams({
+        place: place.label,
+        departure: departureDate.toISOString(),
+        arrival: arrivalDate.toISOString(),
+    }).toString();
+
+    navigate(`/categories?${queryParams}`);
+};
     
 
-    const movingBarRef = useRef(null);
-    const tabsRef = useRef([]);
-
-    const tabs = [
-        { id: "search", label: "Search all VRs", icon: <FaSearch /> },
-        { id: "drive", label: "To drive" },
-        { id: "tow", label: "Tow" },
-        { id: "delivery", label: "Delivery" },
-    ];
-
-    const handleTabChange = (tabId, index) => {
-        setActiveTab(tabId);
-        setDepartureDate(null);
-        setArrivalDate(null);
-        setPlace(null);
-        updateMovingBar(index);
-    };
-
-    const updateMovingBar = (index) => {
-        if (movingBarRef.current && tabsRef.current[index]) {
-            const { offsetLeft, offsetWidth } = tabsRef.current[index];
-            movingBarRef.current.style.width = `${offsetWidth}px`;
-            movingBarRef.current.style.transform = `translateX(${offsetLeft}px)`;
-        }
-    };
-
-    useEffect(() => {
-        const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
-        updateMovingBar(activeIndex);
-    }, [activeTab]);
 
     return (
         <div className="bg-cover bg-center h-screen bg-no-repeat bg-opacity-50 flex flex-col items-center text-white"
@@ -70,29 +42,8 @@ const HomePage = () => {
 
             <div className="bg-white shadow-lg md:w-[1200px] mx-auto p-3 md:p-3 rounded-2xl">
     {/* Tabs Section */}
-    <div className="relative shadow-lg flex flex-wrap items-center h-auto text-md rounded-lg p-2">
-        <div className="flex flex-wrap gap-x-10 md:gap-x-10 md:ps-72">
-            {tabs.map((tab, index) => (
-                <a
-                    href="#"
-                    key={tab.id}
-                    data-tab={tab.id}
-                    className={`tab-item font-small pb-2 text-lg no-underline focus:outline-none flex items-center space-x-6 relative ${
-                        activeTab === tab.id ? "text-blue-600" : "text-gray-600 hover:text-gray-900"
-                    }`}
-                    onClick={() => handleTabChange(tab.id, index)}
-                    ref={(el) => (tabsRef.current[index] = el)}
-                >
-                    <span className="text-lg">{tab.icon}</span>
-                    <span>{tab.label}</span>
-                </a>
-            ))}
-        </div>
-        <div
-            ref={movingBarRef}
-            className="absolute bottom-0 h-1 bg-blue-600 transition-all duration-250"
-            style={{ width: 0, transform: "translateX(0)" }}
-        ></div>
+    <div className="relative text-black text-2xl font-bold shadow-lg justify-center items-center flex flex-wrap h-auto text-md rounded-lg p-2">
+        Search All Trailer
     </div>
 
     {/* Search Bar */}
@@ -101,7 +52,6 @@ const HomePage = () => {
         <div className="flex-1 border-b md:border-b-0 md:border-r border-gray-300 w-full md:w-auto">
             <label className="block text-xs text-gray-500 mt-2 ml-2">Place</label>
             <GooglePlacesAutocomplete
-                key={activeTab}
                 apiKey={process.env.REACT_APP_API_KEYS}
                 selectProps={{
                     value: place,
@@ -215,7 +165,7 @@ const HomePage = () => {
 
         {/* Search Button */}
         <div className="py-2 w-full md:w-auto text-center md:text-left">
-            <button onClick={handleSearch} className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 focus:outline-none">
+            <button onClick={() => handleSearch(navigate)} className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 focus:outline-none">
                 Search
             </button>
         </div>

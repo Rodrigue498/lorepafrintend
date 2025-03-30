@@ -37,34 +37,34 @@ const TrailerData = [
       {/* Blog Title */}
       <div className="max-w-4xl">
         <h1 className="text-6xl font-bold text-gray-800 text-center mb-6">
-         Lorepa .vs Towlos: An In-Depth Comparison
+         Lorepa .vs Turo: An In-Depth Comparison
         </h1>
         
 
         {/* Blog Introduction */}
         <p className="text-xl text-gray-700 mb-8 text-center">
           Peer-to-peer marketplaces are a common way to make money these days.
-          From Airbnb and VRBO to Lorepa and Towlos—there are plenty of
+          From Airbnb and VRBO to Lorepa and Turo—there are plenty of
           opportunities for repurposing assets to generate cash! In this blog,
-          we will compare Lorepa and Towlos as a profitable side hustle.
+          we will compare Lorepa and Turo as a profitable side hustle.
         </p>
 
         {/* Comparison Sections */}
         <div className="space-y-10">
           {/* Lorepa Section */}
           <div>
-            <h2 className="text-4xl font-semibold text-gray-800 mb-4">Lorepa</h2>
+            <h2 className="text-4xl font-semibold text-gray-800 mb-4">Turo</h2>
             <p className="text-xl text-gray-700">
-              Lorepa operates as a car-sharing network, similar to Airbnb but for
+              Turo operates as a car-sharing network, similar to Airbnb but for
               cars, offering a wide range of over 800 makes and models. Renters
               can select various additional features such as car seats and
               pickup locations. Car owners also set their requirements, such as
               mileage limits and minimum renter age. With prices advertised as
-              up to 35% less than traditional rental companies, Lorepa presents a
-              cost-effective option for renters. Hosts on Lorepa can earn an
+              up to 35% less than traditional rental companies, Turo presents a
+              cost-effective option for renters. Hosts on Turo can earn an
               average of $500 per month for one car, and the platform offers
               additional insurance options for both renters and owners. However,
-              Lorepa’s service does have limitations, such as not supporting
+              Turo’s service does have limitations, such as not supporting
               one-way trips and typically having mileage limitations set by car
               owners.
             </p>
@@ -72,17 +72,17 @@ const TrailerData = [
 
           {/* Towlos Section */}
           <div>
-            <h2 className="text-4xl font-semibold text-gray-800 mb-4">Towlos</h2>
+            <h2 className="text-4xl font-semibold text-gray-800 mb-4">Lorepa</h2>
             <p className="text-xl text-gray-700 mb-4">
-              In contrast, Towlos focuses on trailer rentals, connecting trailer
+              In contrast, Lorepa focuses on trailer rentals, connecting trailer
               owners with renters. This niche market includes a diverse range of
               trailers, catering to specific needs like moving or transporting
               vehicles. The rental process is straightforward—finding trailers
               in the area, booking the right one, and then towing. For trailer
-              owners, listing on Towlos presents an opportunity to earn income
+              owners, listing on Lorepa presents an opportunity to earn income
               from an otherwise idle asset. User feedback highlights the
               convenience and ease of the rental process, and the ability to
-              make money from renting out trailers. Towlos targets a specific
+              make money from renting out trailers. Lorepas targets a specific
               market segment, making it an attractive platform for those with
               trailers used for occasional purposes.
             </p>
@@ -96,28 +96,28 @@ const TrailerData = [
           <div className="max-w-6xl w-full">
         {/* Title */}
         <h1 className="text-5xl font-bold text-gray-800  mb-6">
-        Lorepa vs. Towlos
+        Lorepa vs. Turos
         </h1>
 
         {/* Conclusion */}
         <p className="text-xl text-gray-700 mb-6">
           In conclusion, while Lorepa offers a broader car rental service with
-          its own set of benefits, investing in a trailer to become a Towlos
+          its own set of benefits, investing in a trailer to become a Turos
           host presents a more accessible and potentially more profitable
           venture, especially if you are looking into a peer-to-peer marketplace
           as a side hustle, and therefore have not purchased the rental asset
           yet. If you already own a spare car, or a trailer, the math is a
-          little different, but many of the benefits of Towlos remain!
+          little different, but many of the benefits of Turo remain!
         </p>
         <p className="text-xl text-gray-700 mb-8">
           The lower initial investment, reduced maintenance costs, and unique
-          market position make Towlos an appealing option for those looking to
+          market position make Turo an appealing option for those looking to
           monetize an asset in the peer-to-peer rental space.
         </p>
 </div>
           <div className="mt-12">
             <h2 className="text-4xl font-semibold text-gray-800 mb-6">
-              Lorepa Return on Investment
+              Turo Return on Investment
             </h2>
             <div className="overflow-x-auto">
             <table className="table-fixed border-collapse border border-slate-400 w-full text-gray-800">
@@ -169,7 +169,7 @@ const TrailerData = [
             </div>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
-              *Car Prices Found Using Kelly Blue Book **Average Daily Rate Noted on Lorepa.com
+              *Car Prices Found Using Kelly Blue Book **Average Daily Rate Noted on Turo.com
             </p>
            
           </div>
@@ -207,8 +207,7 @@ const TrailerData = [
             </div>
 
             <p className="text-sm text-gray-500 mt-4 text-center">
-              *Average Daily Rate Noted on Lorepa.com
-            </p>
+              *Average Daily Rate Noted on Lorepa.ca            </p>
            
           </div>
         </div>

@@ -5,13 +5,11 @@ import line from "../../assets/line.png";
 import car from "../../assets/car.png";
 import callcenter from "../../assets/callcenter.png";
 import internet from "../../assets/internet.png";
-import ChangePassword from "../admin/password";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { FaSearch } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faApple, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
@@ -80,10 +78,6 @@ const Navbar = () => {
         }
     };
 
-    // const handlePhoneChange = (value, country) => {
-    //     setPhoneNumber(value);
-    //     setIsValidPhone(isValidNumber(value, country?.dialCode));
-    // }; 
     const API_URL = process.env.REACT_APP_API_URL;
 
     const handleRegister = async () => {
@@ -190,27 +184,19 @@ const Navbar = () => {
     };
     
     
-    
 
-    // Function to handle email registration
-    
-    // useEffect(() => {
-    //   const storedUser = localStorage.getItem("user");
-    //   if (storedUser) {
-    //     setUser(JSON.parse(storedUser));
-    //   }
-    // }, []);
     const handlePlaceSelect = (selectedPlace) => {
-      setPlace(selectedPlace);
-      if (selectedPlace?.value?.place_id) {
-        const placeId = selectedPlace.value.place_id;
-  
-        // Update Google Maps iframe URL dynamically
-        setMapSrc(
-          `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&q=place_id:${placeId}`
-        );
-      }
+        setPlace(selectedPlace);
+        
+        if (selectedPlace?.value?.place_id) {
+            const placeId = selectedPlace.value.place_id;
+            
+            // Navigate to CarRental page with selected filters
+            navigate(`/categories?place=${selectedPlace.label}&departure=${departureDate}&arrival=${arrivalDate}`);
+        }
     };
+    
+    
 
 
     useEffect(() => {
@@ -232,23 +218,53 @@ const Navbar = () => {
     return (
         <nav className="fixed flex bg-white shadow-md w-full z-50 items-center h-16">
             {/* Logo on the left */}
-            <a href="/" onClick={(e) => e.preventDefault()}>
+            <a href="/" onClick={() => navigate('/')}>
     <img src={logo} alt="RVez Logo" className="h-30 w-40" />
 </a>
 
 
             {/* Search Bar */}
             {showSearchBar && location.pathname !== "/" && location.pathname !== "/categories" && (
-                <div className="flex items-center border-b border-gray-800 ml-8 flex-grow max-w-md ">
-                    <FaSearch className="text-gray-500 ml-3" />
-                    <input
-                        type="text"
-                        placeholder="City, airport, address or hotel"
-                        className="border-b border-0  px-4 py-2 "
-                    />
-                </div>
+              <div className="flex flex-wrap w-full gap-4"> <GooglePlacesAutocomplete
+        apiKey={process.env.REACT_APP_API_KEYS}
+        selectProps={{
+          value: place,
+          onChange: handlePlaceSelect,
+          placeholder: "City, airport, address or hotel",
+          styles: {
+            control: (provided) => ({
+              ...provided,
+              borderRadius: "8px",
+              padding: "12px",
+              fontSize: "16px",
+              border: "0",
+              boxShadow: "none",
+              backgroundColor: "transparent",
+              minWidth: "300px",
+            }),
+            menu: (provided) => ({
+              ...provided,
+              boxShadow: "none",
+              borderRadius: "8px",
+              padding: "12px 0",
+              backgroundColor: "white",
+              color: "black",
+              minWidth: "300px",
+            }),
+          },
+        }}
+      />
+
+        
+      
+        <div className="py-2 md:w-auto text-center md:text-left">
+            <button className=" md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 focus:outline-none">
+                Search
+            </button>
+        </div></div>
             )}
-{date && location.pathname === "/categories" && (<div className="flex flex-wrap w-full gap-4"> <GooglePlacesAutocomplete
+{date && location.pathname === "/categories" && (
+  <div className="flex flex-wrap w-full gap-4"> <GooglePlacesAutocomplete
         apiKey={process.env.REACT_APP_API_KEYS}
         selectProps={{
           value: place,
@@ -435,10 +451,6 @@ const Navbar = () => {
 
 
         {/* Social Login Buttons */}
-        <button className="w-full bg-white border py-3 text-lg rounded-lg flex items-center justify-center gap-2 mt-2">
-          <FontAwesomeIcon icon={faApple} className="mr-2" />
-          Continue with Apple
-        </button>
 
         <button onClick={() => setEmailModal(true)} className="w-full bg-white border py-3 text-lg rounded-lg flex items-center justify-center gap-2 mt-2">
           <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-black-500" />
@@ -569,10 +581,10 @@ const Navbar = () => {
   </div>
 )}
 
-        <button className="w-full bg-white border py-3 text-lg rounded-lg flex items-center justify-center gap-2 mt-2">
+        {/* <button className="w-full bg-white border py-3 text-lg rounded-lg flex items-center justify-center gap-2 mt-2">
           <FontAwesomeIcon icon={faFacebook} className="ml-2 mr-2 text-blue-500" />
           Continue with Facebook
-        </button>
+        </button> */}
       </div>
     </div>
   </div>
@@ -635,7 +647,7 @@ const Navbar = () => {
     <a
       href="#host"
       className="hidden md:block px-4 py-2 text-black no-underline font-sm"
-      onClick={() => navigate('/dashboard')}
+      onClick={() => navigate('/becomehost')}
     >
       Become a host
     </a>
@@ -669,8 +681,10 @@ const Navbar = () => {
   <div className="fixed top-16 right-4 md:right-0 mx-auto bg-white shadow-lg w-full sm:w-64 md:w-1/6 py-4 rounded-lg border border-gray-200">
     <a
       onClick={() => {
-        loginmodal();
-        setIsOpen(false);
+        if (!user) {
+          loginmodal();
+          setIsOpen(false);
+        }
       }}
       className="block px-6 py-2 text-black font-md cursor-pointer hover:bg-gray-100"
     >
@@ -678,8 +692,10 @@ const Navbar = () => {
     </a>
     <a
       onClick={() => {
-        loginmodal();
-        setIsOpen(false);
+        if (!user) {
+          loginmodal();
+          setIsOpen(false);
+        }
       }}
       className="block px-6 py-2 text-black font-md cursor-pointer hover:bg-gray-100"
     >

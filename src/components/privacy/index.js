@@ -160,7 +160,7 @@ const PrivacyPolicy = () => {
                     If you have any questions or concerns about this Privacy Policy, please contact us at:
                 </p>
                 <p className="text-gray-700 mb-8 text-justify">
-                    <strong>Email:</strong> <a href="mailto:contact@lorepa.com" className="text-blue-600">contact@lorepa.com</a><br />
+                    <strong>Email:</strong> <a href="mailto:contact@lorepa.ca" className="text-blue-600">contact@lorepa.ca</a><br />
                     <strong>Address:</strong> 3910 Rue de Bellechasse, Montréal, Québec, H1X 1J4
                 </p>
 

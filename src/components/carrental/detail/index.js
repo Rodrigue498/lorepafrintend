@@ -29,8 +29,9 @@ const CarDetailPage = ({trailer}) => {
         <h2 className="text-3xl font-bold">{trailer?.title}</h2>
         <p className="text-gray-500">{trailer?.type}</p>
         <p className="text-xl font-bold text-purple-600 mt-2">
-          ⭐ {trailer?.rating} <span className="text-gray-500">({trailer?.reviews} trip)</span>
-        </p>
+  ⭐ {trailer?.rating} <span className="text-gray-500">({trailer?.reviews?.length || 0} trips)</span>
+</p>
+
       </div>
 
       {/* Pricing */}

@@ -24,8 +24,7 @@ const comments = [
     response: { name: "Philipp", text: "Thank you." },
   },
 ];
-
-const RatingBar = ({ name, score }) => (
+export function RatingBar({ name, score }){
   <div className="flex items-center justify-between mb-2">
     <span className="text-gray-700">{name}</span>
     <div className="flex-1 mx-3 bg-gray-300 h-2 rounded-full overflow-hidden">
@@ -36,31 +35,46 @@ const RatingBar = ({ name, score }) => (
     </div>
     <span className="text-gray-700">{score}</span>
   </div>
-);
+}
 
-const ReviewCard = ({ review }) => (
-  <div className="bg-white shadow-md rounded-lg p-4 my-4">
-    <div className="flex items-center">
-      <div className="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
-      <div>
-        <div className="flex items-center">
-          {[...Array(review.rating)].map((_, i) => (
-            <Star key={i} size={16} className="text-purple-600" fill="currentColor" />
-          ))}
+export function ReviewCard({ review }) {
+  if (!review || typeof review !== "object") {
+    return <p className="text-red-500">Invalid review data</p>;
+  }
+
+  return (
+    <div className="bg-white shadow-md rounded-lg p-4 my-4">
+      <div className="flex items-center">
+        <div className="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
+        <div>
+          {/* Star Rating */}
+          <div className="flex items-center">
+            {Array.from({ length: 5 }, (_, i) => (
+              <Star
+                key={i}
+                size={16}
+                className={i < review.rating ? "text-purple-600" : "text-gray-300"}
+                fill={i < review.rating ? "currentColor" : "none"}
+              />
+            ))}
+          </div>
+          
+          {/* Reviewer Name */}
+          <p className="font-semibold">{review.reviewer || "Anonymous"}</p>
+
+          {/* Review Date */}
+          <p className="text-gray-500 text-sm">
+            {review.created_at ? new Date(review.created_at).toDateString() : "No date"}
+          </p>
         </div>
-        <p className="font-semibold">{review.user}</p>
-        <p className="text-gray-500 text-sm">{review.date}</p>
       </div>
+
+      {/* Review Comment */}
+      <p className="mt-2 text-gray-700">{review.comment || "No comment provided."}</p>
     </div>
-    <p className="mt-2 text-gray-700">{review.comment}</p>
-    {review.response && (
-      <div className="mt-3 bg-gray-100 p-3 rounded-md">
-        <p className="font-semibold">Response from {review.response.name}</p>
-        <p className="text-gray-600">{review.response.text}</p>
-      </div>
-    )}
-  </div>
-);
+  );
+}
+
 
 const Reviews = () => {
   return (

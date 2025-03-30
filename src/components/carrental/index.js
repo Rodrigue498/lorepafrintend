@@ -2,15 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Filter, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import fortwoImage from "../../assets/fortwo.jpg";
+import { useLocation } from "react-router-dom";
 
 import axios from "axios";
 
 const CarRental = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [trailers, setTrailers] = useState([]); // Store all trailers from API
   const [filteredTrailers, setFilteredTrailers] = useState([]); // Store filtered trailers
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [mapSrc, setMapSrc] = useState(""); // Add this line
+
+const queryParams = new URLSearchParams(location.search);
+const selectedCategory = queryParams.get("category") || "";
+
 
   // ✅ State for Filters
   const [filters, setFilters] = useState({
@@ -48,11 +55,48 @@ const CarRental = () => {
         setLoading(false);
       });
   };
+  const initialFilters = {
+    place: queryParams.get("place") || "",
+    departure: queryParams.get("departure") || "",
+    arrival: queryParams.get("arrival") || "",
+    price_min: queryParams.get("price_min") || "",
+    price_max: queryParams.get("price_max") || "",
+    type: queryParams.get("type") || "",
+};
 
   // Fetch trailers when component mounts
   useEffect(() => {
     fetchTrailers();
-  }, []);
+}, []);
+
+useEffect(() => {
+
+  setFilters({
+    place: queryParams.get("place") || "",
+    departure: queryParams.get("departure") || "",
+    arrival: queryParams.get("arrival") || "",
+    price_min: queryParams.get("price_min") || "",
+    price_max: queryParams.get("price_max") || "",
+    type: queryParams.get("type") || "",
+  });
+
+  // ✅ Update Google Maps iframe if "place" is present
+  const place = queryParams.get("place");
+  if (place) {
+    setMapSrc(
+      `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEYS}&q=${encodeURIComponent(place)}`
+    );
+  }
+}, [location.search]);
+
+
+useEffect(() => {
+  if (trailers.length > 0) {
+      applyFilters();
+  }
+}, [trailers, filters, initialFilters]);
+
+
 
   // ✅ Handle Filter Changes
   const handleFilterChange = (e) => {
@@ -64,41 +108,49 @@ const CarRental = () => {
     let filtered = trailers;
 
     if (filters.price_min) {
-      filtered = filtered.filter(trailer => trailer.price >= filters.price_min);
+        filtered = filtered.filter(trailer => trailer.price >= filters.price_min);
     }
 
     if (filters.price_max) {
-      filtered = filtered.filter(trailer => trailer.price <= filters.price_max);
+        filtered = filtered.filter(trailer => trailer.price <= filters.price_max);
     }
 
     if (filters.type) {
-      filtered = filtered.filter(trailer => trailer.type === filters.type);
+        filtered = filtered.filter(trailer => trailer.type === filters.type);
     }
 
     if (filters.features) {
-      filtered = filtered.filter(trailer =>
-        trailer.features.toLowerCase().includes(filters.features.toLowerCase())
-      );
+        filtered = filtered.filter(trailer =>
+            (trailer.features ? trailer.features.toLowerCase() : "").includes(filters.features.toLowerCase())
+        );
     }
 
     if (filters.size_min) {
-      filtered = filtered.filter(trailer => trailer.size >= filters.size_min);
+        filtered = filtered.filter(trailer => trailer.size >= filters.size_min);
     }
 
     if (filters.size_max) {
-      filtered = filtered.filter(trailer => trailer.size <= filters.size_max);
+        filtered = filtered.filter(trailer => trailer.size <= filters.size_max);
+    }
+
+    if (initialFilters.place) {
+        filtered = filtered.filter(trailer =>
+            (trailer.location ? trailer.location.toLowerCase() : "").includes(initialFilters.place.toLowerCase())
+        );
+    }
+    if (selectedCategory) {
+      filtered = filtered.filter(trailer =>
+        trailer.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
     }
 
     setFilteredTrailers(filtered);
-  };
+};
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Filters Section */}
       <div className="pt-24 flex flex-wrap items-center space-x-2 p-4 border border-gray-300 rounded-lg bg-white">
-        <button className="flex items-center px-3 py-2 border rounded-lg bg-white text-gray-700 hover:bg-gray-100">
-          <Filter size={20} />
-        </button>
 
         {/* Price Min */}
         <input
@@ -211,12 +263,13 @@ const CarRental = () => {
 
           {/* Map Section */}
           <section className="w-full h-screen rounded-lg shadow-lg">
-            <iframe
-              className="w-full h-full rounded-lg"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093705!2d144.953735315321!3d-37.81627974201252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5dfc9dc9ab%3A0x5045675218ce720!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1613951976613!5m2!1sen!2sus"
-              allowFullScreen
-              loading="lazy"
-            ></iframe>
+          <iframe
+  className="w-full h-full rounded-lg"
+  src={mapSrc || "https://www.google.com/maps/embed?pb=..."} // ✅ Use mapSrc here
+  allowFullScreen
+  loading="lazy"
+></iframe>
+
           </section>
         </main>
       )}

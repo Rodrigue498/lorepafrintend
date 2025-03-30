@@ -33,11 +33,7 @@ const InsuranceInfo = () => {
           protection is identical to what you have with your vehicle insurance. If you don't have it, check with your
           insurer to find out how much it would cost to add it.
         </p>
-        <div className="flex justify-center">
-          <button className="bg-black text-xl text-white text-lg px-6 py-3 rounded-lg shadow-md hover:bg-gray-800">
-            Find a Trailer
-          </button>
-        </div>
+
       </div>
     </div>
   );

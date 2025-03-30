@@ -72,9 +72,7 @@ const TrailerRental = () => {
                             alt="Trailer"
                             className="w-full h-[24rem] rounded-lg shadow-lg mt-4"
                         />
-                        <button className="w-60 bottom-4 px-8 py-2 mt-4 bg-gray-50 rounded-3xl text-xl font-semibold border border-black-300">
-                            Get Started
-                        </button>
+
                     </div>
 
                     {/* Right Features */}

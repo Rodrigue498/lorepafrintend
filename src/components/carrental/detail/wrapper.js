@@ -4,7 +4,7 @@ import CarDetailPage from ".";
 import MoreCarDetailPage from "./moredetail";
 import TrailerDetails from "./location";
 import MoreCarDetailInfo from "./info";
-import Reviews from "./review";
+import Reviews, { ReviewCard } from "./review";
 import axios from "axios";
 
 export const CarDetailWrapper = () => {
@@ -45,7 +45,7 @@ export const CarDetailWrapper = () => {
       <MoreCarDetailPage trailer={trailer} />
       <TrailerDetails trailer={trailer} />
       <MoreCarDetailInfo trailer={trailer} />
-      <Reviews trailer={trailer} />
+      <ReviewCard trailer={trailer} />
     </>
   );
 };

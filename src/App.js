@@ -78,7 +78,6 @@ function App() {
               <TrailerRental />
               <TrailerSection />
               <ComparisonSection />
-              <RevenueBanner />
             </>
           } />
           <Route path="/howLorepaWorks" element={

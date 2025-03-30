@@ -12,13 +12,13 @@ const FooterScreen = () => {
           <h3 className="font-bold text-lg mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="no-undeline text-red-500 hover:underline">Home</a>
+              <a href="#" className="no-undeline text-red-500 hover:underline" onClick={() => navigate('/')}>Home</a>
             </li>
             <li>
-              <a href="#" className="hover:underline text-black">About Us</a>
+              <a href="#" className="hover:underline text-black" onClick={() => navigate('/howLorepaWorks')}>About Us</a>
             </li>
             <li>
-              <a href="#" className="hover:underline text-black">Estimate Your Rental Income</a>
+              <a href="#" className="hover:underline text-black" onClick={() => navigate('/becomehost')}>Estimate Your Rental Income</a>
             </li>
           </ul>
         </div>

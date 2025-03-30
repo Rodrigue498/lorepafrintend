@@ -64,6 +64,9 @@ const ComparisonSection = () => {
           <p className="text-lg font-semibold text-gray-700 mt-4">Turo</p>
         </div>
       </div>
+      <button className="bg-blue text-base sm:text-lg w-11/12 sm:w-96 h-12 text-black px-6 py-2 rounded-full hover:bg-gray-700 hover:text-white border-0"  onClick={() => navigate('/learnmore')}>
+                Learn More
+              </button>
     </div>
   );
 };

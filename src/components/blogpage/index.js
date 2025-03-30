@@ -3,7 +3,7 @@ import React from "react";
 const BlogPage = () => {
   return (
     <div 
-      className="relative flex   min-h-screen justify-center bg-gray-100"
+      className="relative flex min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8"
       style={{
         backgroundImage: `url(${require("../../assets/turo.jpeg")})`,
         backgroundSize: "cover",
@@ -12,8 +12,10 @@ const BlogPage = () => {
       }}
     >
       {/* Text Overlay on Right */}
-      <div className=" bg-opacity-80   rounded-lg shadow-lg mr-10">
-        <h1 className="text-[200px] text-white">Lorepa vs Towlos</h1>
+      <div className=" p-4 sm:p-6 md:p-8 lg:p-10 rounded-lg shadow-lg  max-w-8xl xl:ml-64">
+        <h1 className="text-8xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[200px] text-white font-bold">
+          Lorepa vs Turo
+        </h1>
       </div>
     </div>
   );

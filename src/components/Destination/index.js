@@ -2,7 +2,7 @@ import React from "react";
 
 const TopDestinations = () => {
     const destinations = [
-        { name: "Monteral", location: "Saguency", image: require("../../assets/sague.png") },
+        { name: "Montréal", location: "Saguency", image: require("../../assets/monteral.jpg") },
         { name: "Québec", location: "Quebec", image: require("../../assets/qubec.png") },
         { name: "Gatineau", location: "Gatineau", image: require("../../assets/gatienu.png") },
         { name: "Sherbrooke", location: "Sherbrooke", image: require("../../assets/sherb.png") },

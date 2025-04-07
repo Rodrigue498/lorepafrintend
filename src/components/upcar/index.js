@@ -6,10 +6,10 @@ const SignUpCar = () => {
     <div className="flex items-center justify-between px-8 py-16">
       <div className="flex flex-col space-y-4">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          List Your Car Today
+          List Your Trailer Today
         </h1>
         <p className="text-gray-700 text-xl">
-          Join hundreds of thousands of Turo hosts and start earning money as early as tomorrow.
+          Join hundreds of thousands of Lorepa hosts and start earning money as early as tomorrow.
         </p>
       </div>
 

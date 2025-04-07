@@ -53,11 +53,10 @@ const FooterScreen = () => {
       <div className="max-w-6xl mx-auto mt-10 flex flex-col md:flex-row justify-between items-center text-sm text-center md:text-left">
         <div>
           <div className="flex justify-center md:justify-start space-x-4 mb-4">
-            <a href="#" className="text-blue-600 hover:text-black"><i className="fab fa-2x fa-facebook"></i></a>
-            <a href="#" className="text-pink-600 hover:text-black"><i className="fab fa-2x fa-instagram"></i></a>
-            <a href="#" className="text-black hover:text-black"><i className="fab fa-2x fa-tiktok"></i></a>
-            <a href="#" className="text-blue-600 hover:text-black"><i className="fab fa-2x fa-linkedin"></i></a>
-          </div>
+            <a href="https://www.facebook.com/people/Lorepa/61561996935366/?rdid=tc2u75lBVFJSYP34&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DXG7aEt1A%2F" className="text-blue-600 hover:text-black"><i className="fab fa-2x fa-facebook"></i></a>
+            <a href="https://www.instagram.com/lorepa.ca/?igsh=amgxNXI5b2Z2eTFr#" className="text-pink-600 hover:text-black"><i className="fab fa-2x fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@lorepa.ca?_t=ZN-8vGH2EYxivG&_r=1" className="text-black hover:text-black"><i className="fab fa-2x fa-tiktok"></i></a>
+                      </div>
           <p className="text-gray-500 max-w-md mx-auto md:mx-0">
             Our platform is proudly insured by Intact Assurance, a leader in security and insurance.
           </p>

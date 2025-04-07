@@ -14,7 +14,7 @@ const AddNewCar = ({ user }) => {
     features: [],
     size: "",
     trailer_weight:"",
-    max_payload:"",
+    max_load:"",
     connector_type:"",
     trailer_brakes:"",
     available:true,
@@ -36,10 +36,38 @@ const AddNewCar = ({ user }) => {
   
 
   // Handle image upload
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);
-    setFormData({ ...formData, images: files });
+    
+    const uploadedImageFiles = [];
+  
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+  
+      try {
+        const uploadResponse = await axios.post(`${API_URL}/upload`, formData, {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+    
+        // Assuming the server response contains the uploaded image URL
+        uploadedImageFiles.push(uploadResponse.data.url); // You can store URLs if needed for preview purposes, but this should not be sent for form submission
+      } catch (error) {
+        console.error("Image upload failed:", error);
+        alert("Image upload failed");
+      }
+    }
+    
+    // Instead of storing URLs in images, use the uploaded files directly in the final form submission.
+    setFormData((prev) => ({
+      ...prev,
+      images: files,  // Store the files for final submission
+    }));
   };
+  
 
   // Store data from each step before moving forward
   const saveStepData = (stepData) => {
@@ -63,19 +91,19 @@ const AddNewCar = ({ user }) => {
     console.log("Submitting formData:", formData);
   
     Object.entries(formData).forEach(([key, value]) => {
-      if (key === "images") {
-        value.forEach((file) => formDataToSend.append("images[]", file));
+      if (key === "images" && Array.isArray(value)) {
+        value.forEach((url) => formDataToSend.append("images[]", url));
       } else if (key === "features" && Array.isArray(value)) {
-        value.forEach((feature) => formDataToSend.append("features[]", feature)); 
-        } else if (key === "available") {
-          formDataToSend.append("available", formData.available ? true : false);
-        }
-        else if (typeof value === "object") {
-        formDataToSend.append(key, JSON.stringify(value)); 
+        value.forEach((feature) => formDataToSend.append("features[]", feature));
+      } else if (key === "available") {
+        formDataToSend.append("available", formData.available ? "true" : "false");
+      } else if (typeof value === "object") {
+        formDataToSend.append(key, JSON.stringify(value));
       } else {
         formDataToSend.append(key, value);
       }
     });
+    
   
     try {
       const response = await axios.post(`${API_URL}/trailers/create`, formDataToSend, {
@@ -200,14 +228,15 @@ const AddNewCar = ({ user }) => {
 
             {/* Upload Image */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Upload Images</label>
-              <input
-                type="file"
-                multiple
-                onChange={handleImageUpload}
-                className="mt-1 block w-full"
-              />
-            </div>
+  <label className="block text-sm font-medium text-gray-700">Upload Images</label>
+  <input
+    type="file"
+    multiple
+    onChange={handleImageUpload}
+    className="mt-1 block w-full"
+  />
+</div>
+
 
             {/* Next Button */}
             <div className="flex justify-end">

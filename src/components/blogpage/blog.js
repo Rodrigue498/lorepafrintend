@@ -96,13 +96,13 @@ const TrailerData = [
           <div className="max-w-6xl w-full">
         {/* Title */}
         <h1 className="text-5xl font-bold text-gray-800  mb-6">
-        Lorepa vs. Turos
+        Lorepa vs. Turo
         </h1>
 
         {/* Conclusion */}
         <p className="text-xl text-gray-700 mb-6">
           In conclusion, while Lorepa offers a broader car rental service with
-          its own set of benefits, investing in a trailer to become a Turos
+          its own set of benefits, investing in a trailer to become a Turo
           host presents a more accessible and potentially more profitable
           venture, especially if you are looking into a peer-to-peer marketplace
           as a side hustle, and therefore have not purchased the rental asset

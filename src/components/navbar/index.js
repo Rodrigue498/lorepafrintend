@@ -2,26 +2,20 @@ import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.png";
 import contact from "../../assets/contact.png";
 import line from "../../assets/line.png";
-import car from "../../assets/car.png";
 import callcenter from "../../assets/callcenter.png";
 import internet from "../../assets/internet.png";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { FaSearch } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useLocation } from "react-router-dom";
-import { auth } from "../../firebaseConfig";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { isValidNumber } from "libphonenumber-js";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { FaTrailer } from "react-icons/fa";
+import GoogleTranslate from "../googletranslator";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 const Navbar = () => {
@@ -31,10 +25,6 @@ const Navbar = () => {
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [loginModal, setLoginModal] = useState(false);
     const location = useLocation();
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [otp, setOtp] = useState("");
-    const [confirmationResult, setConfirmationResult] = useState(null);
-    const [isValidPhone, setIsValidPhone] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -57,6 +47,24 @@ const Navbar = () => {
           const [mapSrc, setMapSrc] = useState(
             "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093705!2d144.953735315321!3d-37.81627974201252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5dfc9dc9ab%3A0x5045675218ce720!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1613951976613!5m2!1sen!2sus"
           );
+
+          const [showLang, setShowLang] = useState(false);
+
+          const handleIconClick = () => {
+            setShowLang(!showLang);
+            // open the Google Translate dropdown
+            setTimeout(() => {
+              const iframe = document.querySelector("iframe.goog-te-menu-frame");
+              if (iframe) {
+                const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const menu = innerDoc.querySelector(".goog-te-menu2");
+                if (menu) {
+                  innerDoc.querySelector(".goog-te-menu2 table").focus(); // optional: highlight menu
+                }
+              }
+            }, 500);
+          };
+        
 
     useEffect(() => {
       // Retrieve user from localStorage when the component mounts
@@ -381,11 +389,12 @@ const Navbar = () => {
 
 
         </div>
-        <div className="py-2 md:w-auto text-center md:text-left">
-            <button className=" md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 focus:outline-none">
-                Search
-            </button>
-        </div></div>)}
+        <div className="w-full md:w-auto py-2">
+  <button className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 focus:outline-none">
+    Search
+  </button>
+</div>
+</div>)}
 
             {loginModal && (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4">
@@ -657,11 +666,9 @@ const Navbar = () => {
 
 
                 {/* User Icons */}
-                <img
-                        src={internet}
-                        alt="Internet Icon"
-                        className="h-10 w-10"
-                    />
+                <div className="relative">
+      <GoogleTranslate />
+    </div>
                 <div className="flex items-center" onClick={toggleMenu}>
                   
                     <img

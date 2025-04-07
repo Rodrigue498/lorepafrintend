@@ -51,8 +51,8 @@ const AttributesForm = ({ formData = { attributes: {} }, setFormData, onNext }) 
                 <label className="block text-gray-700 mb-2">Max Payload</label>
 <input
   type="text"
-  name="max_payload"
-  value={formData?.attributes?.max_payload || ""}
+  name="max_load"
+  value={formData?.attributes?.max_load || ""}
   onChange={handleChange}
   className="w-full border-gray-300 rounded-lg shadow-sm p-2 mb-4"
   placeholder="Enter Max Payload"

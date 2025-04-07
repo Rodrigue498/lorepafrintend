@@ -101,17 +101,17 @@ const TrailerData = [
 
         {/* Conclusion */}
         <p className="text-xl text-gray-700 mb-6">
-          In conclusion, while Lorepa offers a broader car rental service with
-          its own set of benefits, investing in a trailer to become a Turo
+          In conclusion, while Turo offers a broader car rental service with
+          its own set of benefits, investing in a trailer to become a Lorepa
           host presents a more accessible and potentially more profitable
           venture, especially if you are looking into a peer-to-peer marketplace
           as a side hustle, and therefore have not purchased the rental asset
           yet. If you already own a spare car, or a trailer, the math is a
-          little different, but many of the benefits of Turo remain!
+          little different, but many of the benefits of Lorepa remain!
         </p>
         <p className="text-xl text-gray-700 mb-8">
           The lower initial investment, reduced maintenance costs, and unique
-          market position make Turo an appealing option for those looking to
+          market position make Lorepa an appealing option for those looking to
           monetize an asset in the peer-to-peer rental space.
         </p>
 </div>

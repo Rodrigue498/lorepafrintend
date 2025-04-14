@@ -35,7 +35,7 @@ const handleSearch = (navigate) => {
         <div className="bg-cover bg-center h-screen bg-no-repeat bg-opacity-50 flex flex-col items-center text-white"
             style={{ backgroundImage: `url(${require("../../assets/main.png")})` }}
         >
-            <div className="md:text-5xl font-extrabold tracking-wide mt-20">Find Your Ideal RV</div>
+            <div className="md:text-5xl font-extrabold tracking-wide mt-20">Find Your Ideal Trailer</div>
             <h5 className="text-lg mt-2 mb-8">
                 Discover the best trailers and motorhomes for your RV adventure
             </h5>

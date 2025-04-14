@@ -13,11 +13,11 @@ const AddNewCar = ({ user }) => {
     type: "",
     features: [],
     size: "",
-    trailer_weight:"",
-    max_load:"",
-    connector_type:"",
-    trailer_brakes:"",
-    available:true,
+    trailer_weight: "",
+    max_load: "",
+    connector_type: "",
+    trailer_brakes: "",
+    available: true,
     price: "",
     images: [],
     location: {}
@@ -33,50 +33,27 @@ const AddNewCar = ({ user }) => {
       [name]: name === "features" ? value.split(",").map(f => f.trim()) : value, // ✅ Ensure features is always an array
     }));
   };
-  
+
 
   // Handle image upload
   const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);
-    
-    const uploadedImageFiles = [];
-  
-    for (const file of files) {
-      const formData = new FormData();
-      formData.append("file", file);
-  
-      try {
-        const uploadResponse = await axios.post(`${API_URL}/upload`, formData, {
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
-    
-        // Assuming the server response contains the uploaded image URL
-        uploadedImageFiles.push(uploadResponse.data.url); // You can store URLs if needed for preview purposes, but this should not be sent for form submission
-      } catch (error) {
-        console.error("Image upload failed:", error);
-        alert("Image upload failed");
-      }
-    }
-    
-    // Instead of storing URLs in images, use the uploaded files directly in the final form submission.
+    console.log("Selected files:", files); // Log the selected files
     setFormData((prev) => ({
       ...prev,
-      images: files,  // Store the files for final submission
+      images: files,
     }));
   };
   
+
 
   // Store data from each step before moving forward
   const saveStepData = (stepData) => {
     setFormData((prevData) => ({ ...prevData, ...stepData }));
   };
 
-  // Move to next tab
   const handleNext = (stepData) => {
-    saveStepData({ attributes: { ...formData.attributes, ...stepData.attributes } });
+    saveStepData(stepData); // now stepData is already flattened
     if (activeTab < 3) {
       setActiveTab(activeTab + 1);
     } else {
@@ -84,15 +61,17 @@ const AddNewCar = ({ user }) => {
     }
   };
 
+
   // Handle Form Submission after all tabs are completed
 
+  // Handle Form Submission after all tabs are completed
   const handleSubmit = async () => {
     const formDataToSend = new FormData();
-    console.log("Submitting formData:", formData);
+    console.log("Submitting formData:", formData); // Log the formData
   
     Object.entries(formData).forEach(([key, value]) => {
       if (key === "images" && Array.isArray(value)) {
-        value.forEach((url) => formDataToSend.append("images[]", url));
+        value.forEach((file) => formDataToSend.append("images[]", file)); // Append files to FormData
       } else if (key === "features" && Array.isArray(value)) {
         value.forEach((feature) => formDataToSend.append("features[]", feature));
       } else if (key === "available") {
@@ -103,12 +82,13 @@ const AddNewCar = ({ user }) => {
         formDataToSend.append(key, value);
       }
     });
-    
   
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.post(`${API_URL}/trailers/create`, formDataToSend, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
         },
       });
   
@@ -120,7 +100,8 @@ const AddNewCar = ({ user }) => {
     }
   };
   
-  
+
+
 
   return (
     <div className="bg-gray-100 p-8">
@@ -132,11 +113,10 @@ const AddNewCar = ({ user }) => {
           {["Content", "Locations", "Attributes"].map((tab, index) => (
             <button
               key={index}
-              className={`flex-1 text-center py-2 text-sm font-medium ${
-                activeTab === index + 1
+              className={`flex-1 text-center py-2 text-sm font-medium ${activeTab === index + 1
                   ? "border-b-2 border-blue-500 text-blue-500"
                   : "text-gray-500"
-              }`}
+                }`}
               onClick={() => setActiveTab(index + 1)}
             >
               {index + 1}. {tab.toUpperCase()}
@@ -198,7 +178,7 @@ const AddNewCar = ({ user }) => {
             </div>
             <div className="mb-4">
               <label htmlFor="features" className="block text-sm font-medium text-gray-700">
-              types
+                types
               </label>
               <input
                 type="text"
@@ -210,7 +190,7 @@ const AddNewCar = ({ user }) => {
                 className="mt-1 block w-full border border-gray-300 rounded-lg p-2"
               />
             </div>
-            
+
             <div className="mb-4">
               <label htmlFor="features" className="block text-sm font-medium text-gray-700">
                 Size of trailer
@@ -228,14 +208,22 @@ const AddNewCar = ({ user }) => {
 
             {/* Upload Image */}
             <div>
-  <label className="block text-sm font-medium text-gray-700">Upload Images</label>
-  <input
-    type="file"
-    multiple
-    onChange={handleImageUpload}
-    className="mt-1 block w-full"
-  />
-</div>
+              <label className="block text-sm font-medium text-gray-700">Upload Images</label>
+              <input
+                type="file"
+                multiple
+                onChange={handleImageUpload}
+                className="mt-1 block w-full"
+              />
+              {formData.images.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  {formData.images.map((imgUrl, idx) => (
+                    <img key={idx} src={imgUrl} alt={`Uploaded ${idx}`} className="w-full h-40 object-cover rounded-lg" />
+                  ))}
+                </div>
+              )}
+
+            </div>
 
 
             {/* Next Button */}
